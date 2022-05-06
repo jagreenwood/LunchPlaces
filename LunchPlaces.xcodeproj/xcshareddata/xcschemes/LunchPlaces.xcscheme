@@ -58,6 +58,26 @@
                ReferencedContainer = "container:Packages/Model">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CacheTests"
+               BuildableName = "CacheTests"
+               BlueprintName = "CacheTests"
+               ReferencedContainer = "container:Packages/Cache">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PlacesAPITests"
+               BuildableName = "PlacesAPITests"
+               BlueprintName = "PlacesAPITests"
+               ReferencedContainer = "container:Packages/PlacesAPI">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

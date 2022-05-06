@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "tiny-networking",
+      "kind" : "remoteSourceControl",
+      "location" : "http://github.com/objcio/tiny-networking.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "ee700f5d88ebabf59c9685563c2e2553b5120bc0"
+      }
+    }
+  ],
+  "version" : 2
+}
