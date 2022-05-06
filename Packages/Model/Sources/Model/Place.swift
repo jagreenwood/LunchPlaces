@@ -16,8 +16,6 @@ public struct Place: Codable, Equatable {
     public let placeID: String
     public let priceLevel: Int
     public let rating: Double
-    public let reference: String
-    public let types: [String]
     public let userRatingsTotal: Int
 
     enum CodingKeys: String, CodingKey {
@@ -29,8 +27,6 @@ public struct Place: Codable, Equatable {
         case placeID = "place_id"
         case priceLevel = "price_level"
         case rating = "rating"
-        case reference = "reference"
-        case types = "types"
         case userRatingsTotal = "user_ratings_total"
     }
 
@@ -43,8 +39,6 @@ public struct Place: Codable, Equatable {
         placeID: String,
         priceLevel: Int,
         rating: Double,
-        reference: String,
-        types: [String],
         userRatingsTotal: Int) {
             self.businessStatus = businessStatus
             self.formattedAddress = formattedAddress
@@ -54,8 +48,6 @@ public struct Place: Codable, Equatable {
             self.placeID = placeID
             self.priceLevel = priceLevel
             self.rating = rating
-            self.reference = reference
-            self.types = types
             self.userRatingsTotal = userRatingsTotal
         }
 }
