@@ -10,6 +10,7 @@
 		3F736D7B282530E300296D67 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7A282530E300296D67 /* Core */; };
 		3F736D7D282530E300296D67 /* Mock in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7C282530E300296D67 /* Mock */; };
 		3F736D7F282530E300296D67 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7E282530E300296D67 /* Model */; };
+		3F736D8228253B6E00296D67 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D8128253B6E00296D67 /* Cache */; };
 		3FD5D33728245D6400F0C100 /* LunchPlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5D33628245D6400F0C100 /* LunchPlacesApp.swift */; };
 		3FD5D33928245D6400F0C100 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5D33828245D6400F0C100 /* ContentView.swift */; };
 		3FD5D33B28245D6500F0C100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FD5D33A28245D6500F0C100 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F736D7F282530E300296D67 /* Model in Frameworks */,
+				3F736D8228253B6E00296D67 /* Cache in Frameworks */,
 				3F736D7D282530E300296D67 /* Mock in Frameworks */,
 				3F736D7B282530E300296D67 /* Core in Frameworks */,
 			);
@@ -147,6 +149,7 @@
 				3F736D7A282530E300296D67 /* Core */,
 				3F736D7C282530E300296D67 /* Mock */,
 				3F736D7E282530E300296D67 /* Model */,
+				3F736D8128253B6E00296D67 /* Cache */,
 			);
 			productName = LunchPlaces;
 			productReference = 3FD5D33328245D6400F0C100 /* LunchPlaces.app */;
@@ -512,6 +515,10 @@
 		3F736D7E282530E300296D67 /* Model */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Model;
+		};
+		3F736D8128253B6E00296D67 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Cache;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
