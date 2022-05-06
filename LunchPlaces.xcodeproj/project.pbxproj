@@ -32,6 +32,7 @@
 		3FD5D33D28245D6500F0C100 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3FD5D34328245D6500F0C100 /* LunchPlacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunchPlacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD5D34728245D6500F0C100 /* LunchPlacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchPlacesTests.swift; sourceTree = "<group>"; };
+		3FD5D3612824A2AE00F0C100 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +56,7 @@
 		3FD5D32A28245D6400F0C100 = {
 			isa = PBXGroup;
 			children = (
+				3FD5D3602824A25E00F0C100 /* Packages */,
 				3FD5D33528245D6400F0C100 /* LunchPlaces */,
 				3FD5D34628245D6500F0C100 /* LunchPlacesTests */,
 				3FD5D33428245D6400F0C100 /* Products */,
@@ -95,6 +97,14 @@
 				3FD5D34728245D6500F0C100 /* LunchPlacesTests.swift */,
 			);
 			path = LunchPlacesTests;
+			sourceTree = "<group>";
+		};
+		3FD5D3602824A25E00F0C100 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				3FD5D3612824A2AE00F0C100 /* Core */,
+			);
+			path = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
