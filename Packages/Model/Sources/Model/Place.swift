@@ -8,15 +8,15 @@
 import Foundation
 
 public struct Place: Codable, Equatable {
-    public let businessStatus: String
-    public let formattedAddress: String
+    public let businessStatus: BusinessStatus?
+    public let formattedAddress: String?
     public let geometry: Geometry
     public let name: String
     public let openingHours: OpeningHours
     public let placeID: String
-    public let priceLevel: Int
-    public let rating: Double
-    public let userRatingsTotal: Int
+    public let priceLevel: Int?
+    public let rating: Double?
+    public let userRatingsTotal: Int?
 
     enum CodingKeys: String, CodingKey {
         case businessStatus = "business_status"
@@ -31,15 +31,15 @@ public struct Place: Codable, Equatable {
     }
 
     public init(
-        businessStatus: String,
-        formattedAddress: String,
+        businessStatus: BusinessStatus?,
+        formattedAddress: String?,
         geometry: Geometry,
         name: String,
         openingHours: OpeningHours,
         placeID: String,
-        priceLevel: Int,
-        rating: Double,
-        userRatingsTotal: Int) {
+        priceLevel: Int?,
+        rating: Double?,
+        userRatingsTotal: Int?) {
             self.businessStatus = businessStatus
             self.formattedAddress = formattedAddress
             self.geometry = geometry
@@ -50,4 +50,10 @@ public struct Place: Codable, Equatable {
             self.rating = rating
             self.userRatingsTotal = userRatingsTotal
         }
+}
+
+public enum BusinessStatus: String, Codable {
+    case operational = "OPERATIONAL"
+    case closedTemporarily = "CLOSED_TEMPORARILY"
+    case closedPermanently = "CLOSED_PERMANENTLY"
 }
