@@ -38,6 +38,26 @@
                ReferencedContainer = "container:Packages/Core">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "MockTests"
+               BuildableName = "MockTests"
+               BlueprintName = "MockTests"
+               ReferencedContainer = "container:Packages/Mock">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ModelTests"
+               BuildableName = "ModelTests"
+               BlueprintName = "ModelTests"
+               ReferencedContainer = "container:Packages/Model">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

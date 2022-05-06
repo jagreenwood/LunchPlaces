@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F736D7B282530E300296D67 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7A282530E300296D67 /* Core */; };
+		3F736D7D282530E300296D67 /* Mock in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7C282530E300296D67 /* Mock */; };
+		3F736D7F282530E300296D67 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7E282530E300296D67 /* Model */; };
 		3FD5D33728245D6400F0C100 /* LunchPlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5D33628245D6400F0C100 /* LunchPlacesApp.swift */; };
 		3FD5D33928245D6400F0C100 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5D33828245D6400F0C100 /* ContentView.swift */; };
 		3FD5D33B28245D6500F0C100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FD5D33A28245D6500F0C100 /* Assets.xcassets */; };
@@ -26,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		3F736D772824A6AD00296D67 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Model; sourceTree = "<group>"; };
+		3F736D7828252EA500296D67 /* Mock */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Mock; sourceTree = "<group>"; };
 		3FD5D33328245D6400F0C100 /* LunchPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunchPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD5D33628245D6400F0C100 /* LunchPlacesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchPlacesApp.swift; sourceTree = "<group>"; };
 		3FD5D33828245D6400F0C100 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,6 +45,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F736D7F282530E300296D67 /* Model in Frameworks */,
+				3F736D7D282530E300296D67 /* Mock in Frameworks */,
+				3F736D7B282530E300296D67 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +61,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F736D79282530E300296D67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3FD5D32A28245D6400F0C100 = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +75,7 @@
 				3FD5D33528245D6400F0C100 /* LunchPlaces */,
 				3FD5D34628245D6500F0C100 /* LunchPlacesTests */,
 				3FD5D33428245D6400F0C100 /* Products */,
+				3F736D79282530E300296D67 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +118,7 @@
 		3FD5D3602824A25E00F0C100 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				3F736D7828252EA500296D67 /* Mock */,
 				3FD5D3612824A2AE00F0C100 /* Core */,
 				3F736D772824A6AD00296D67 /* Model */,
 			);
@@ -125,6 +141,11 @@
 			dependencies = (
 			);
 			name = LunchPlaces;
+			packageProductDependencies = (
+				3F736D7A282530E300296D67 /* Core */,
+				3F736D7C282530E300296D67 /* Mock */,
+				3F736D7E282530E300296D67 /* Model */,
+			);
 			productName = LunchPlaces;
 			productReference = 3FD5D33328245D6400F0C100 /* LunchPlaces.app */;
 			productType = "com.apple.product-type.application";
@@ -476,6 +497,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F736D7A282530E300296D67 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		3F736D7C282530E300296D67 /* Mock */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Mock;
+		};
+		3F736D7E282530E300296D67 /* Model */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Model;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3FD5D32B28245D6400F0C100 /* Project object */;
 }
