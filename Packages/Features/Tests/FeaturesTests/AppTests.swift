@@ -11,7 +11,7 @@ import XCTest
 @testable import App
 
 extension AppDomain.Environment {
-    static let failing = Self()
+    static var failing = Self()
 }
 
 final class AppDomainTests: XCTestCase {

@@ -37,6 +37,7 @@ let package = Package(
         .testTarget(
             name: "FeaturesTests",
             dependencies: [
+                "App",
                 "Common",
                 "Mock",
                 .product(name: "Overture", package: "swift-overture")
