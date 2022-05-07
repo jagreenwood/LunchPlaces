@@ -78,6 +78,16 @@
                ReferencedContainer = "container:Packages/PlacesAPI">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FeaturesTests"
+               BuildableName = "FeaturesTests"
+               BlueprintName = "FeaturesTests"
+               ReferencedContainer = "container:Packages/Features">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
