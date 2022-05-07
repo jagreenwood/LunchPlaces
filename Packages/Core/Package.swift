@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "Core",
-            targets: ["Core"]),
+            targets: ["Core"])
     ],
     dependencies: [],
     targets: [
@@ -18,6 +18,6 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "CoreTests",
-            dependencies: ["Core"]),
+            dependencies: ["Core"])
     ]
 )

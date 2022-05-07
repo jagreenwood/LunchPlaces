@@ -10,6 +10,7 @@ import Core
 import Foundation
 import TinyNetworking
 
+// swiftlint:disable force_cast
 public extension Endpoint {
     /// Loads data from an `Endpoint`
     /// - Parameter session: A type conforming to `Session`. defaults to an instance of `URLSession`

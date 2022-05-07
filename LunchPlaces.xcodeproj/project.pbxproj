@@ -148,6 +148,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FD5D35728245D6500F0C100 /* Build configuration list for PBXNativeTarget "LunchPlaces" */;
 			buildPhases = (
+				3F2605BE282701060055E25B /* Swiftlint */,
 				3FD5D32F28245D6400F0C100 /* Sources */,
 				3FD5D33028245D6400F0C100 /* Frameworks */,
 				3FD5D33128245D6400F0C100 /* Resources */,
@@ -244,6 +245,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3F2605BE282701060055E25B /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swiftlint\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3FD5D32F28245D6400F0C100 /* Sources */ = {
