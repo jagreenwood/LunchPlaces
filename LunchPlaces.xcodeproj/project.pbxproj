@@ -33,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		3F2605BB2826FE890055E25B /* Localization */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Localization; sourceTree = "<group>"; };
+		3F2605BF282705C40055E25B /* UIComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UIComponents; sourceTree = "<group>"; };
 		3F736D772824A6AD00296D67 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Model; sourceTree = "<group>"; };
 		3F736D7828252EA500296D67 /* Mock */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Mock; sourceTree = "<group>"; };
 		3F736D802825358500296D67 /* Cache */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Cache; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		3FD5D3602824A25E00F0C100 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				3F2605BF282705C40055E25B /* UIComponents */,
 				3F736D802825358500296D67 /* Cache */,
 				3FD5D3612824A2AE00F0C100 /* Core */,
 				3FF23B1B2826F6E7003A5732 /* Features */,
