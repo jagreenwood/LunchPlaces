@@ -10,6 +10,7 @@
 		3F2605BA2826FB280055E25B /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605B92826FB280055E25B /* Common */; };
 		3F2605BD2826FF760055E25B /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605BC2826FF760055E25B /* Localization */; };
 		3F2605C1282707590055E25B /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605C0282707590055E25B /* UIComponents */; };
+		3F2605C3282709B70055E25B /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605C2282709B70055E25B /* App */; };
 		3F423A2F282542CE00702264 /* PlacesAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 3F423A2E282542CE00702264 /* PlacesAPI */; };
 		3F736D7B282530E300296D67 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7A282530E300296D67 /* Core */; };
 		3F736D7D282530E300296D67 /* Mock in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7C282530E300296D67 /* Mock */; };
@@ -55,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2605C3282709B70055E25B /* App in Frameworks */,
 				3F2605C1282707590055E25B /* UIComponents in Frameworks */,
 				3F736D7F282530E300296D67 /* Model in Frameworks */,
 				3F2605BD2826FF760055E25B /* Localization in Frameworks */,
@@ -171,6 +173,7 @@
 				3F2605B92826FB280055E25B /* Common */,
 				3F2605BC2826FF760055E25B /* Localization */,
 				3F2605C0282707590055E25B /* UIComponents */,
+				3F2605C2282709B70055E25B /* App */,
 			);
 			productName = LunchPlaces;
 			productReference = 3FD5D33328245D6400F0C100 /* LunchPlaces.app */;
@@ -557,6 +560,10 @@
 		3F2605C0282707590055E25B /* UIComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UIComponents;
+		};
+		3F2605C2282709B70055E25B /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
 		};
 		3F423A2E282542CE00702264 /* PlacesAPI */ = {
 			isa = XCSwiftPackageProductDependency;

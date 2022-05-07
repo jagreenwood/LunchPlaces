@@ -7,13 +7,14 @@ let package = Package(
     name: "Features",
     platforms: [.iOS(.v15)],
     products: [
+        .library(name: "App", targets: ["App"]),
         .library(name: "Common", targets: ["Common"])
     ],
     dependencies: [
         .package(path: "../Core"),
-        .package(path: "../UIComponents"),
-        .package(path: "../PlacesAPI"),
         .package(path: "../Mock"),
+        .package(path: "../PlacesAPI"),
+        .package(path: "../UIComponents"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.34.0"),
         .package(url: "https://github.com/pointfreeco/swift-overture", from: "0.5.0")
     ],
@@ -22,9 +23,15 @@ let package = Package(
             name: "Common",
             dependencies: [
                 "Core",
-                "UIComponents",
-                "PlacesAPI",
                 "Mock",
+                "PlacesAPI",
+                "UIComponents",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
+        .target(
+            name: "App",
+            dependencies: [
+                "Common",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
         .testTarget(
