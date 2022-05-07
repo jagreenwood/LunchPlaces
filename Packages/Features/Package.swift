@@ -7,7 +7,7 @@ let package = Package(
     name: "Features",
     platforms: [.iOS(.v15)],
     products: [
-        .library(name: "Common", targets: ["Common"]),
+        .library(name: "Common", targets: ["Common"])
     ],
     dependencies: [
         .package(path: "../Core"),

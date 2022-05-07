@@ -8,6 +8,7 @@
 import Foundation
 import Model
 
+// swiftlint:disable force_try
 public struct Mock {
     /// Returns a static list of Place types
     public static var places: [Place] {

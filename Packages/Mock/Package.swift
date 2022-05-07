@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "Mock",
-            targets: ["Mock"]),
+            targets: ["Mock"])
     ],
     dependencies: [
         .package(path: "../Model")
@@ -22,6 +22,6 @@ let package = Package(
             ]),
         .testTarget(
             name: "MockTests",
-            dependencies: ["Mock"]),
+            dependencies: ["Mock"])
     ]
 )

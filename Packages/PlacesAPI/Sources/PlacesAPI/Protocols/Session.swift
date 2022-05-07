@@ -11,7 +11,7 @@ import TinyNetworking
 
 /// A protocol to enable better test coverage
 public protocol Session {
-    func load<A>(_ e: Endpoint<A>) -> AnyPublisher<A, Error>
+    func load<A>(_ endpoint: Endpoint<A>) -> AnyPublisher<A, Error>
 }
 
 extension URLSession: Session {}

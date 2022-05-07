@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "PlacesAPI",
-            targets: ["PlacesAPI"]),
+            targets: ["PlacesAPI"])
     ],
     dependencies: [
         .package(path: "../Core"),
@@ -26,6 +26,6 @@ let package = Package(
             ]),
         .testTarget(
             name: "PlacesAPITests",
-            dependencies: ["PlacesAPI"]),
+            dependencies: ["PlacesAPI"])
     ]
 )
