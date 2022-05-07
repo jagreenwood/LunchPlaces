@@ -12,6 +12,7 @@ let package = Package(
             targets: ["PlacesAPI"]),
     ],
     dependencies: [
+        .package(path: "../Core"),
         .package(path: "../Model"),
         .package(url: "http://github.com/objcio/tiny-networking.git", branch: "master")
     ],
@@ -19,6 +20,7 @@ let package = Package(
         .target(
             name: "PlacesAPI",
             dependencies: [
+                "Core",
                 "Model",
                 .product(name: "TinyNetworking", package: "tiny-networking")
             ]),
