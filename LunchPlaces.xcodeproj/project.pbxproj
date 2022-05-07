@@ -42,6 +42,7 @@
 		3FD5D34328245D6500F0C100 /* LunchPlacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunchPlacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD5D34728245D6500F0C100 /* LunchPlacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchPlacesTests.swift; sourceTree = "<group>"; };
 		3FD5D3612824A2AE00F0C100 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
+		3FF23B1B2826F6E7003A5732 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +125,7 @@
 		3FD5D3602824A25E00F0C100 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				3FF23B1B2826F6E7003A5732 /* Features */,
 				3F736D832825400800296D67 /* PlacesAPI */,
 				3F736D802825358500296D67 /* Cache */,
 				3FD5D3612824A2AE00F0C100 /* Core */,
