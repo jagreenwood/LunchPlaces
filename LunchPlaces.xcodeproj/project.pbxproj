@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F2605BA2826FB280055E25B /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605B92826FB280055E25B /* Common */; };
 		3F2605BD2826FF760055E25B /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605BC2826FF760055E25B /* Localization */; };
+		3F2605C1282707590055E25B /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605C0282707590055E25B /* UIComponents */; };
 		3F423A2F282542CE00702264 /* PlacesAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 3F423A2E282542CE00702264 /* PlacesAPI */; };
 		3F736D7B282530E300296D67 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7A282530E300296D67 /* Core */; };
 		3F736D7D282530E300296D67 /* Mock in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7C282530E300296D67 /* Mock */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		3F2605BB2826FE890055E25B /* Localization */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Localization; sourceTree = "<group>"; };
+		3F2605BF282705C40055E25B /* UIComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UIComponents; sourceTree = "<group>"; };
 		3F736D772824A6AD00296D67 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Model; sourceTree = "<group>"; };
 		3F736D7828252EA500296D67 /* Mock */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Mock; sourceTree = "<group>"; };
 		3F736D802825358500296D67 /* Cache */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Cache; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2605C1282707590055E25B /* UIComponents in Frameworks */,
 				3F736D7F282530E300296D67 /* Model in Frameworks */,
 				3F2605BD2826FF760055E25B /* Localization in Frameworks */,
 				3F423A2F282542CE00702264 /* PlacesAPI in Frameworks */,
@@ -137,6 +140,7 @@
 				3F736D7828252EA500296D67 /* Mock */,
 				3F736D772824A6AD00296D67 /* Model */,
 				3F736D832825400800296D67 /* PlacesAPI */,
+				3F2605BF282705C40055E25B /* UIComponents */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -166,6 +170,7 @@
 				3F423A2E282542CE00702264 /* PlacesAPI */,
 				3F2605B92826FB280055E25B /* Common */,
 				3F2605BC2826FF760055E25B /* Localization */,
+				3F2605C0282707590055E25B /* UIComponents */,
 			);
 			productName = LunchPlaces;
 			productReference = 3FD5D33328245D6400F0C100 /* LunchPlaces.app */;
@@ -548,6 +553,10 @@
 		3F2605BC2826FF760055E25B /* Localization */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Localization;
+		};
+		3F2605C0282707590055E25B /* UIComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UIComponents;
 		};
 		3F423A2E282542CE00702264 /* PlacesAPI */ = {
 			isa = XCSwiftPackageProductDependency;

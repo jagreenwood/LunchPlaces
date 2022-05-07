@@ -11,6 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Core"),
+        .package(path: "../UIComponents"),
         .package(path: "../PlacesAPI"),
         .package(path: "../Mock"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.34.0"),
@@ -21,6 +22,7 @@ let package = Package(
             name: "Common",
             dependencies: [
                 "Core",
+                "UIComponents",
                 "PlacesAPI",
                 "Mock",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
