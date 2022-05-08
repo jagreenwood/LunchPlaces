@@ -15,6 +15,7 @@ extension LocationManager {
         manager.authorizationStatus = { CLAuthorizationStatus.authorizedWhenInUse }
         manager.requestLocation = { .none }
         manager.delegate = { .none }
+        manager.requestWhenInUseAuthorization = { .none }
 
         return manager
     }()

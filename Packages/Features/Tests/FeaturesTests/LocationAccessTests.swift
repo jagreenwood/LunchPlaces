@@ -9,20 +9,36 @@ import ComposableArchitecture
 import Overture
 import XCTest
 @testable import LocationAccess
+@testable import LocationService
 
 extension LocationAccessDomain.Environment {
-    static let failing = Self()
+    static let failing = Self(
+        locationServiceEnvironment: .mock
+    )
 }
 
 final class LocationAccessDomainTests: XCTestCase {
-    func testName() throws {
+    func testOnAppear() {
         let store = TestStore(
             initialState: LocationAccessDomain.State(),
             reducer: LocationAccessDomain.reducer,
             environment: .mock(.failing))
 
-        store.send(.onAppear) {
-            $0.name = "LocationAccess"
+        store.send(.onAppear)
+        store.receive(.locationService(.getServiceStatus))
+        store.receive(.locationService(.setServiceStatus(.authorizedWhenInUse, true))) {
+            $0.locationServiceState.clAuthorizationStatus = .authorizedWhenInUse
+            $0.locationServiceState.locationServiceEnabled = true
         }
+    }
+
+    func testConfirmAction() {
+        let store = TestStore(
+            initialState: LocationAccessDomain.State(),
+            reducer: LocationAccessDomain.reducer,
+            environment: .mock(.failing))
+
+        store.send(.didSelectConfirm)
+        store.receive(.locationService(.authorize))
     }
 }

@@ -13,7 +13,6 @@ import CoreLocation
 
 public struct LocationAccessDomain: Equatable {
     public struct State: Equatable {
-        public var name: String = ""
         var locationServiceState = LocationServiceDomain.State()
 
         var locationEnabled: Bool {

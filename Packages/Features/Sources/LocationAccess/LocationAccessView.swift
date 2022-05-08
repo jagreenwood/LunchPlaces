@@ -13,11 +13,7 @@ public struct LocationAccessView: View {
 
     public var body: some View {
         WithViewStore(store) { viewStore in
-            Text(viewStore.name)
-                .padding()
-                .onAppear {
-                    viewStore.send(.onAppear)
-                }
+
         }
     }
 }

@@ -14,6 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Core"),
+        .package(path: "../Localization"),
         .package(path: "../Mock"),
         .package(path: "../PlacesAPI"),
         .package(path: "../UIComponents"),
@@ -42,6 +43,7 @@ let package = Package(
             dependencies: [
                 "Common",
                 "LocationService",
+                "Localization",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
         .target(
