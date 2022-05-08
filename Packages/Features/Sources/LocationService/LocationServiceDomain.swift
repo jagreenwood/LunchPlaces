@@ -10,15 +10,45 @@ import Combine
 import ComposableCoreLocation
 import Foundation
 
-struct LocationServiceDomain: Equatable {
-    struct State: Equatable {
-        var authorizationStatus: CLAuthorizationStatus = .notDetermined
-        var error: AppError? = nil
-        var location: Location? = nil
-        var locationServiceEnabled: Bool = false
+public struct LocationServiceDomain: Equatable {
+    public enum AuthorizationStatus {
+        case authorized
+        case denied
+        case notDetermined
     }
 
-    enum Action: Equatable {
+    public struct State: Equatable {
+        public var error: AppError?
+        public var location: Location?
+        public var locationServiceEnabled: Bool
+        var clAuthorizationStatus: CLAuthorizationStatus
+
+        public var authorizationStatus: AuthorizationStatus {
+            switch clAuthorizationStatus {
+            case .notDetermined:
+                return .notDetermined
+            case .restricted, .denied:
+                return .denied
+            case .authorizedAlways, .authorizedWhenInUse, .authorized:
+                return .authorized
+            @unknown default:
+                fatalError("Unknown auth status")
+            }
+        }
+
+        public init(
+            authorizationStatus: CLAuthorizationStatus = .notDetermined,
+            error: AppError? = nil,
+            location: Location? = nil,
+            locationServiceEnabled: Bool = false) {
+                self.clAuthorizationStatus = authorizationStatus
+                self.error = error
+                self.location = location
+                self.locationServiceEnabled = locationServiceEnabled
+            }
+    }
+
+    public enum Action: Equatable {
         case authorize
         case error(_ error: AppError?)
         case getLocation
@@ -28,17 +58,17 @@ struct LocationServiceDomain: Equatable {
         case setServiceStatus(CLAuthorizationStatus, Bool)
     }
 
-    struct Environment {
+    public struct Environment {
         var locationManager: LocationManager
 
-        static let live = Self(
+        public static let live = Self(
             locationManager: .live)
 
-        static let mock = Self(
+        public static let mock = Self(
             locationManager: .mock)
     }
 
-    static let reducer = Reducer<State, Action, Environment> { state, action, environment in
+    public static let reducer = Reducer<State, Action, Environment> { state, action, environment in
         switch action {
         case .authorize:
             return .merge(
@@ -90,7 +120,7 @@ struct LocationServiceDomain: Equatable {
             return .none
 
         case let .setServiceStatus(status, enabled):
-            state.authorizationStatus = status
+            state.clAuthorizationStatus = status
             state.locationServiceEnabled = enabled
             return .none
         }
