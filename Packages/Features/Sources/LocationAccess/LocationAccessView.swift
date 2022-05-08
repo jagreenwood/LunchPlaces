@@ -7,13 +7,16 @@
 
 import ComposableArchitecture
 import SwiftUI
+import Localization
 
 public struct LocationAccessView: View {
     let store: Store<LocationAccessDomain.State, LocationAccessDomain.Action>
 
     public var body: some View {
         WithViewStore(store) { viewStore in
-
+            VStack {
+                Text(Localization.LocationAccess.title)
+            }
         }
     }
 }
