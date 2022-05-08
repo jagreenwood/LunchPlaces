@@ -7,9 +7,10 @@
 
 import Common
 import ComposableArchitecture
-import Foundation
-import LocationService
 import CoreLocation
+import Foundation
+import Localization
+import LocationService
 
 public struct LocationAccessDomain: Equatable {
     public struct State: Equatable {
@@ -21,6 +22,21 @@ public struct LocationAccessDomain: Equatable {
 
         var authorizationStatus: LocationServiceDomain.AuthorizationStatus {
             locationServiceState.authorizationStatus
+        }
+
+        var bodyText: String {
+            if !locationEnabled {
+                return Localization.LocationAccess.disabledBody
+            }
+
+            switch authorizationStatus {
+            case .authorized:
+                preconditionFailure("\(authorizationStatus) outside of scope for domain. Should not need to handle.")
+            case .denied:
+                return Localization.LocationAccess.deniedBody
+            case .notDetermined:
+                return Localization.LocationAccess.notDeterminedBody
+            }
         }
 
         var showConfirmButton: Bool {

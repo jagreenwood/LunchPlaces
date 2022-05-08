@@ -12,7 +12,7 @@ extension LocationManager {
     static var mock: LocationManager = {
         var manager = LocationManager.failing
         manager.locationServicesEnabled = { true }
-        manager.authorizationStatus = { CLAuthorizationStatus.authorizedWhenInUse }
+        manager.authorizationStatus = { CLAuthorizationStatus.notDetermined }
         manager.requestLocation = { .none }
         manager.delegate = { .none }
         manager.requestWhenInUseAuthorization = { .none }

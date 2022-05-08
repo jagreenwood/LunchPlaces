@@ -6,8 +6,9 @@
 //
 
 import ComposableArchitecture
-import SwiftUI
 import Localization
+import SwiftUI
+import UIComponents
 
 public struct LocationAccessView: View {
     let store: Store<LocationAccessDomain.State, LocationAccessDomain.Action>
@@ -16,6 +17,34 @@ public struct LocationAccessView: View {
         WithViewStore(store) { viewStore in
             VStack {
                 Text(Localization.LocationAccess.title)
+                    .font(.largeTitle)
+
+                Spacer()
+
+                VStack(spacing: 20) {
+                    Image(systemName: "location")
+                        .font(.system(
+                            size: 150,
+                            weight: .thin,
+                        design: .default))
+
+                    Text(viewStore.bodyText)
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
+                }
+
+                Spacer()
+
+                if viewStore.showConfirmButton {
+                    Button(Localization.LocationAccess.buttonTitle) {
+                        viewStore.send(.didSelectConfirm)
+                    }
+                    .buttonStyle(ConfirmButtonStyle())
+                }
+            }
+            .padding()
+            .onAppear {
+                viewStore.send(.onAppear)
             }
         }
     }
