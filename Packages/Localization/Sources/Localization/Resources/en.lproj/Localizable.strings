@@ -6,4 +6,4 @@
 "LocationAccess.notDeterminedBody" = "We need to access your location to find the best lunch places around you.";
 "LocationAccess.buttonTitle" = "Authorize";
 
-"Home.searchPlaceholder" = "Search for a restaurant"
+"Home.searchPlaceholder" = "Search for a restaurant";

@@ -52,7 +52,7 @@ public struct LocationAccessDomain: Equatable {
             switch action {
             case .didCompleteAuthorization:
                 return .none
-                
+
             case .didSelectConfirm:
                 return Effect(value: .locationService(.authorize))
 

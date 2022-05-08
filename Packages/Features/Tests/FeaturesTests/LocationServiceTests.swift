@@ -22,7 +22,7 @@ final class LocationServiceDomainTests: XCTestCase {
         let store = TestStore(
             initialState: LocationServiceDomain.State(),
             reducer: LocationServiceDomain.reducer,
-            environment: update(.failing){
+            environment: update(.failing) {
                 $0.locationManager.delegate = { Effect(value: .didChangeAuthorization(.authorizedWhenInUse)) }
                 $0.locationManager.requestWhenInUseAuthorization = { .none }
                 $0.locationManager.authorizationStatus = { CLAuthorizationStatus.authorizedWhenInUse }
