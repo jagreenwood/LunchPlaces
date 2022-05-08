@@ -26,8 +26,8 @@ final class LocationAccessDomainTests: XCTestCase {
 
         store.send(.onAppear)
         store.receive(.locationService(.getServiceStatus))
-        store.receive(.locationService(.setServiceStatus(.authorizedWhenInUse, true))) {
-            $0.locationServiceState.clAuthorizationStatus = .authorizedWhenInUse
+        store.receive(.locationService(.setServiceStatus(.notDetermined, true))) {
+            $0.locationServiceState.clAuthorizationStatus = .notDetermined
             $0.locationServiceState.locationServiceEnabled = true
         }
     }

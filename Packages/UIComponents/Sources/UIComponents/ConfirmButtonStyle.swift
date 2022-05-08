@@ -32,8 +32,7 @@ public struct ConfirmButtonStyle: ButtonStyle {
         let showShadow: Bool
 
         var body: some View {
-
-            return configuration.label
+            configuration.label
                 .font(.headline)
                 .foregroundColor(.primary).colorInvert()
                 .padding(15)

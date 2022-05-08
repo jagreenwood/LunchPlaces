@@ -96,9 +96,7 @@ public struct LocationServiceDomain: Equatable {
 
         case .locationManager(let action):
             switch action {
-            case .didChangeAuthorization(.authorizedWhenInUse),
-                    .didChangeAuthorization(.authorizedAlways):
-
+            case .didChangeAuthorization:
                 return Effect(value: .getServiceStatus)
 
             case .didUpdateLocations(let locations):
