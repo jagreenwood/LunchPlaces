@@ -8,7 +8,8 @@ let package = Package(
     platforms: [.iOS(.v15)],
     products: [
         .library(name: "App", targets: ["App"]),
-        .library(name: "Common", targets: ["Common"])
+        .library(name: "Common", targets: ["Common"]),
+        .library(name: "LocationAccess", targets: ["LocationAccess"])
     ],
     dependencies: [
         .package(path: "../Core"),
@@ -30,6 +31,12 @@ let package = Package(
             ]),
         .target(
             name: "App",
+            dependencies: [
+                "Common",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
+        .target(
+            name: "LocationAccess",
             dependencies: [
                 "Common",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
