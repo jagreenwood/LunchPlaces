@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Localization",
+    defaultLocalization: "en",
     platforms: [.iOS(.v15)],
     products: [
         .library(
@@ -15,6 +16,7 @@ let package = Package(
         .target(
             name: "Localization",
             dependencies: [],
-            resources: [.process("Resources/Localizable.strings")])
+            resources: [.process("Resources")]
+        )
     ]
 )
