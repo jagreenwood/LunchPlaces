@@ -9,7 +9,8 @@ let package = Package(
     products: [
         .library(name: "App", targets: ["App"]),
         .library(name: "Common", targets: ["Common"]),
-        .library(name: "LocationAccess", targets: ["LocationAccess"])
+        .library(name: "LocationAccess", targets: ["LocationAccess"]),
+        .library(name: "LocationService", targets: ["LocationService"])
     ],
     dependencies: [
         .package(path: "../Core"),
@@ -17,7 +18,8 @@ let package = Package(
         .package(path: "../PlacesAPI"),
         .package(path: "../UIComponents"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.34.0"),
-        .package(url: "https://github.com/pointfreeco/swift-overture", from: "0.5.0")
+        .package(url: "https://github.com/pointfreeco/swift-overture.git", from: "0.5.0"),
+        .package(url: "https://github.com/pointfreeco/composable-core-location.git", from: "0.2.0")
     ],
     targets: [
         .target(
@@ -41,12 +43,21 @@ let package = Package(
                 "Common",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
+        .target(
+            name: "LocationService",
+            dependencies: [
+                "Common",
+                .product(name: "ComposableCoreLocation", package: "composable-core-location")
+            ]),
+
         .testTarget(
             name: "FeaturesTests",
             dependencies: [
                 "App",
                 "Common",
                 "Mock",
+                "LocationService",
+                "LocationAccess",
                 .product(name: "Overture", package: "swift-overture")
             ])
     ]
