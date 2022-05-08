@@ -44,6 +44,7 @@ let package = Package(
                 "Common",
                 "LocationService",
                 "Localization",
+                "UIComponents",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
         .target(
