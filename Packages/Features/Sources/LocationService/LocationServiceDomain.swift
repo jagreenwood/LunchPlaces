@@ -50,6 +50,7 @@ public struct LocationServiceDomain: Equatable {
 
     public enum Action: Equatable {
         case authorize
+        case cancel
         case error(_ error: AppError?)
         case getLocation
         case getServiceStatus
@@ -69,16 +70,22 @@ public struct LocationServiceDomain: Equatable {
     }
 
     public static let reducer = Reducer<State, Action, Environment> { state, action, environment in
+        struct LocationServicesCancelID: Hashable {}
+
         switch action {
         case .authorize:
             return .merge(
                 environment.locationManager
                     .delegate()
-                    .map(Action.locationManager),
+                    .map(Action.locationManager)
+                    .cancellable(id: LocationServicesCancelID()),
                 environment.locationManager
                     .requestWhenInUseAuthorization()
                     .fireAndForget()
             )
+
+        case .cancel:
+            return .cancel(id: LocationServicesCancelID())
 
         case .error(let error):
             state.error = error

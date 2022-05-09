@@ -84,7 +84,10 @@ public struct LocationAccessDomain: Equatable {
 
             case .locationService(.setServiceStatus):
                 if state.authorizationStatus == .authorized {
-                    return Effect(value: .didCompleteAuthorization)
+                    return .merge(
+                        Effect(value: .locationService(.cancel)),
+                        Effect(value: .didCompleteAuthorization)
+                    )
                 }
 
                 return .none
