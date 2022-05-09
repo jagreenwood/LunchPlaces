@@ -60,19 +60,22 @@ public struct AppDomain: Equatable {
 
             case .locationAccess(.didCompleteAuthorization):
                 state.locationAccessState = nil
-                return .none
+                return Effect(value: .locationService(.authorize))
 
             case .locationAccess:
                 return .none
 
             case .locationService(.setServiceStatus):
-                if state.locationServiceState.authorizationStatus == .authorized {
+                if state.locationServiceState.authorizationStatus == .authorized &&
+                    state.locationServiceState.locationServiceEnabled == true {
+                    state.locationAccessState = nil // dismiss location access view
 
+                    return Effect(value: .locationService(.authorize))
                 } else {
                     state.locationAccessState = LocationAccessDomain.State(locationServiceState: state.locationServiceState)
-                }
 
-                return .none
+                    return .none
+                }
 
             case .locationService:
                 return .none

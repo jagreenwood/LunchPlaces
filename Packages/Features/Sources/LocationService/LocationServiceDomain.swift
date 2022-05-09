@@ -51,6 +51,7 @@ public struct LocationServiceDomain: Equatable {
     public enum Action: Equatable {
         case authorize
         case cancel
+        case configure
         case error(_ error: AppError?)
         case getLocation
         case getServiceStatus
@@ -75,10 +76,7 @@ public struct LocationServiceDomain: Equatable {
         switch action {
         case .authorize:
             return .merge(
-                environment.locationManager
-                    .delegate()
-                    .map(Action.locationManager)
-                    .cancellable(id: LocationServicesCancelID()),
+                Effect(value: .configure),
                 environment.locationManager
                     .requestWhenInUseAuthorization()
                     .fireAndForget()
@@ -86,6 +84,12 @@ public struct LocationServiceDomain: Equatable {
 
         case .cancel:
             return .cancel(id: LocationServicesCancelID())
+
+        case .configure:
+            return environment.locationManager
+                .delegate()
+                .map(Action.locationManager)
+                .cancellable(id: LocationServicesCancelID())
 
         case .error(let error):
             state.error = error

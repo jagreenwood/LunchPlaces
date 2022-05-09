@@ -31,7 +31,7 @@ public struct LocationAccessDomain: Equatable {
 
             switch authorizationStatus {
             case .authorized:
-                return "Localization.LocationAccess.foo"
+                return Localization.LocationAccess.authorizedBody
             case .denied:
                 return Localization.LocationAccess.deniedBody
             case .notDetermined:
