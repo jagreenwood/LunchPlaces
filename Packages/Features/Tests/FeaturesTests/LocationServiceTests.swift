@@ -30,6 +30,7 @@ final class LocationServiceDomainTests: XCTestCase {
             })
 
         store.send(.authorize)
+        store.receive(.configure)
         store.receive(.locationManager(.didChangeAuthorization(.authorizedWhenInUse)))
         store.receive(.getServiceStatus)
         store.receive(.setServiceStatus(.authorizedWhenInUse, true)) {

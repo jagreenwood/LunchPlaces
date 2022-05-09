@@ -42,5 +42,6 @@ final class LocationAccessDomainTests: XCTestCase {
 
         store.send(.didSelectConfirm)
         store.receive(.locationService(.authorize))
+        store.receive(.locationService(.configure))
     }
 }
