@@ -14,7 +14,7 @@ import LocationService
 
 public struct LocationAccessDomain: Equatable {
     public struct State: Equatable {
-        var locationServiceState = LocationServiceDomain.State()
+        var locationServiceState: LocationServiceDomain.State
 
         var locationEnabled: Bool {
             locationServiceState.locationServiceEnabled
@@ -31,7 +31,7 @@ public struct LocationAccessDomain: Equatable {
 
             switch authorizationStatus {
             case .authorized:
-                preconditionFailure("\(authorizationStatus) outside of scope for domain. Should not need to handle.")
+                return Localization.LocationAccess.authorizedBody
             case .denied:
                 return Localization.LocationAccess.deniedBody
             case .notDetermined:
@@ -43,7 +43,9 @@ public struct LocationAccessDomain: Equatable {
             locationEnabled && authorizationStatus == .notDetermined
         }
 
-        public init() {}
+        public init(locationServiceState: LocationServiceDomain.State) {
+            self.locationServiceState = locationServiceState
+        }
     }
 
     public enum Action: Equatable {
@@ -64,6 +66,11 @@ public struct LocationAccessDomain: Equatable {
     }
 
     public static let reducer = Reducer<State, Action, SystemEnvironment<Environment>>.combine(
+        LocationServiceDomain.reducer
+            .pullback(
+                state: \.locationServiceState,
+                action: /Action.locationService,
+                environment: { $0.locationServiceEnvironment }),
         Reducer { state, action, _ in
             switch action {
             case .didCompleteAuthorization:
@@ -75,9 +82,12 @@ public struct LocationAccessDomain: Equatable {
             case .onAppear:
                 return Effect(value: .locationService(.getServiceStatus))
 
-            case .locationService(.locationManager(.didChangeAuthorization)):
+            case .locationService(.setServiceStatus):
                 if state.authorizationStatus == .authorized {
-                    return Effect(value: .didCompleteAuthorization)
+                    return .merge(
+                        Effect(value: .locationService(.cancel)),
+                        Effect(value: .didCompleteAuthorization)
+                    )
                 }
 
                 return .none
@@ -85,11 +95,6 @@ public struct LocationAccessDomain: Equatable {
             case .locationService:
                 return .none
             }
-        },
-        LocationServiceDomain.reducer
-            .pullback(
-                state: \.locationServiceState,
-                action: /Action.locationService,
-                environment: { $0.locationServiceEnvironment })
+        }
     )
 }

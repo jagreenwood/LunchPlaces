@@ -30,6 +30,7 @@ final class LocationServiceDomainTests: XCTestCase {
             })
 
         store.send(.authorize)
+        store.receive(.configure)
         store.receive(.locationManager(.didChangeAuthorization(.authorizedWhenInUse)))
         store.receive(.getServiceStatus)
         store.receive(.setServiceStatus(.authorizedWhenInUse, true)) {
@@ -42,7 +43,7 @@ final class LocationServiceDomainTests: XCTestCase {
         let location = Location(rawValue: CLLocation(latitude: 10.0, longitude: 10.0))
         let store = TestStore(
             initialState: LocationServiceDomain.State(),
-            reducer: LocationServiceDomain.reducer.debug(),
+            reducer: LocationServiceDomain.reducer,
             environment: .failing)
 
         store.environment.locationManager.requestLocation = {

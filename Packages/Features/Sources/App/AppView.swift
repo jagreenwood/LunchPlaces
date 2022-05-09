@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import SwiftUI
+import LocationAccess
 
 public struct AppView: View {
     let store: Store<AppDomain.State, AppDomain.Action>
@@ -17,11 +18,26 @@ public struct AppView: View {
 
     public var body: some View {
         WithViewStore(store) { viewStore in
-            Text(viewStore.name)
-                .padding()
-                .onAppear {
-                    viewStore.send(.onAppear)
-                }
+            ZStack {
+                Text(viewStore.name)
+                    .padding()
+                    .onAppear {
+                        viewStore.send(.onAppear)
+                    }
+
+                IfLetStore(
+                    store.scope(
+                        state: \.locationAccessState,
+                        action: AppDomain.Action.locationAccess),
+                    then: LocationAccessView.init(store:))
+                .zIndex(1)
+                .animation(
+                    viewStore.locationAccessState == nil
+                    ? .easeIn // dismissing
+                    : nil,    // presenting
+                    value: viewStore.locationAccessState)
+                .transition(.move(edge: .bottom))
+            }
         }
     }
 }

@@ -8,5 +8,6 @@
 import SwiftUI
 
 public extension Color {
+    static let appPrimary = Color.primary
     static let appWhite = Color("appWhite", bundle: .assets)
 }

@@ -13,7 +13,7 @@ struct LunchPlacesApp: App {
     let store = Store(
         initialState: .init(),
         reducer: AppDomain.reducer,
-        environment: .mock(.mock))
+        environment: .live(.live))
 
     var body: some Scene {
         WindowGroup {

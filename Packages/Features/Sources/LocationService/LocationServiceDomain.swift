@@ -40,7 +40,7 @@ public struct LocationServiceDomain: Equatable {
             authorizationStatus: CLAuthorizationStatus = .notDetermined,
             error: AppError? = nil,
             location: Location? = nil,
-            locationServiceEnabled: Bool = false) {
+            locationServiceEnabled: Bool = true) {
                 self.clAuthorizationStatus = authorizationStatus
                 self.error = error
                 self.location = location
@@ -50,6 +50,8 @@ public struct LocationServiceDomain: Equatable {
 
     public enum Action: Equatable {
         case authorize
+        case cancel
+        case configure
         case error(_ error: AppError?)
         case getLocation
         case getServiceStatus
@@ -69,16 +71,25 @@ public struct LocationServiceDomain: Equatable {
     }
 
     public static let reducer = Reducer<State, Action, Environment> { state, action, environment in
+        struct LocationServicesCancelID: Hashable {}
+
         switch action {
         case .authorize:
             return .merge(
-                environment.locationManager
-                    .delegate()
-                    .map(Action.locationManager),
+                Effect(value: .configure),
                 environment.locationManager
                     .requestWhenInUseAuthorization()
                     .fireAndForget()
             )
+
+        case .cancel:
+            return .cancel(id: LocationServicesCancelID())
+
+        case .configure:
+            return environment.locationManager
+                .delegate()
+                .map(Action.locationManager)
+                .cancellable(id: LocationServicesCancelID())
 
         case .error(let error):
             state.error = error

@@ -14,6 +14,7 @@ public struct Localization {
 
     public struct LocationAccess {
         public static let title = NSLocalizedString("LocationAccess.title", bundle: .strings, comment: "")
+        public static let authorizedBody = NSLocalizedString("LocationAccess.authorizedBody", bundle: .strings, comment: "")
         public static let disabledBody = NSLocalizedString("LocationAccess.disabledBody", bundle: .strings, comment: "")
         public static let deniedBody = NSLocalizedString("LocationAccess.deniedBody", bundle: .strings, comment: "")
         public static let notDeterminedBody = NSLocalizedString("LocationAccess.notDeterminedBody", bundle: .strings, comment: "")

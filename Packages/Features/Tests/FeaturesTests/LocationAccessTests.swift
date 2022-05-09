@@ -20,7 +20,8 @@ extension LocationAccessDomain.Environment {
 final class LocationAccessDomainTests: XCTestCase {
     func testOnAppear() {
         let store = TestStore(
-            initialState: LocationAccessDomain.State(),
+            initialState: LocationAccessDomain.State(
+                locationServiceState: LocationServiceDomain.State()),
             reducer: LocationAccessDomain.reducer,
             environment: .mock(.failing))
 
@@ -34,11 +35,13 @@ final class LocationAccessDomainTests: XCTestCase {
 
     func testConfirmAction() {
         let store = TestStore(
-            initialState: LocationAccessDomain.State(),
+            initialState: LocationAccessDomain.State(
+                locationServiceState: LocationServiceDomain.State()),
             reducer: LocationAccessDomain.reducer,
             environment: .mock(.failing))
 
         store.send(.didSelectConfirm)
         store.receive(.locationService(.authorize))
+        store.receive(.locationService(.configure))
     }
 }
