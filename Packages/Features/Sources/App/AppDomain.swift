@@ -58,6 +58,10 @@ public struct AppDomain: Equatable {
                 state.name = "App"
                 return Effect(value: .locationService(.getServiceStatus))
 
+            case .locationAccess(.didCompleteAuthorization):
+                state.locationAccessState = nil
+                return .none
+
             case .locationAccess:
                 return .none
 

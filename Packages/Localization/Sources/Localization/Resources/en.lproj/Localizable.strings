@@ -1,6 +1,7 @@
 "Generic.appName" = "LunchPlaces";
 
 "LocationAccess.title" = "Location Access";
+"LocationAccess.authorizedBody" = "Location services have been authorized for this device.";
 "LocationAccess.disabledBody" = "Location services are disabled on this device, please open Settings.app and enable them.";
 "LocationAccess.deniedBody" = "Location services have been previously denied for this application, please open Settings.app and authorized them.";
 "LocationAccess.notDeterminedBody" = "We need to access your location to find the best lunch places around you.";
