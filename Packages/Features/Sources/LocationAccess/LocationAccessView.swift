@@ -55,7 +55,9 @@ struct LocationAccessView_Previews: PreviewProvider {
     static var previews: some View {
         LocationAccessView(
             store: Store(
-                initialState: LocationAccessDomain.State(),
+                initialState: LocationAccessDomain.State(
+                    locationServiceState: LocationServiceDomain.State()
+                ),
                 reducer: LocationAccessDomain.reducer,
                 environment: .mock(.mock))
         )

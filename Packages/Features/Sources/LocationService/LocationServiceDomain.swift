@@ -40,7 +40,7 @@ public struct LocationServiceDomain: Equatable {
             authorizationStatus: CLAuthorizationStatus = .notDetermined,
             error: AppError? = nil,
             location: Location? = nil,
-            locationServiceEnabled: Bool = false) {
+            locationServiceEnabled: Bool = true) {
                 self.clAuthorizationStatus = authorizationStatus
                 self.error = error
                 self.location = location

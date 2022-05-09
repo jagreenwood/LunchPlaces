@@ -14,7 +14,7 @@ import LocationService
 
 public struct LocationAccessDomain: Equatable {
     public struct State: Equatable {
-        var locationServiceState = LocationServiceDomain.State()
+        var locationServiceState: LocationServiceDomain.State
 
         var locationEnabled: Bool {
             locationServiceState.locationServiceEnabled
@@ -43,7 +43,9 @@ public struct LocationAccessDomain: Equatable {
             locationEnabled && authorizationStatus == .notDetermined
         }
 
-        public init() {}
+        public init(locationServiceState: LocationServiceDomain.State) {
+            self.locationServiceState = locationServiceState
+        }
     }
 
     public enum Action: Equatable {
