@@ -42,7 +42,7 @@ final class LocationServiceDomainTests: XCTestCase {
         let location = Location(rawValue: CLLocation(latitude: 10.0, longitude: 10.0))
         let store = TestStore(
             initialState: LocationServiceDomain.State(),
-            reducer: LocationServiceDomain.reducer.debug(),
+            reducer: LocationServiceDomain.reducer,
             environment: .failing)
 
         store.environment.locationManager.requestLocation = {

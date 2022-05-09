@@ -13,6 +13,10 @@ import UIComponents
 public struct LocationAccessView: View {
     let store: Store<LocationAccessDomain.State, LocationAccessDomain.Action>
 
+    public init(store: Store<LocationAccessDomain.State, LocationAccessDomain.Action>) {
+        self.store = store
+    }
+
     public var body: some View {
         WithViewStore(store) { viewStore in
             VStack {
@@ -43,6 +47,7 @@ public struct LocationAccessView: View {
                 }
             }
             .padding()
+            .background(Color.appPrimary.colorInvert())
             .onAppear {
                 viewStore.send(.onAppear)
             }
