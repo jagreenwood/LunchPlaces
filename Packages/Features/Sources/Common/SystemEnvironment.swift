@@ -7,26 +7,32 @@
 
 import CombineSchedulers
 import Foundation
+import PlacesAPI
 
 @dynamicMemberLookup
 /// A type which holds global dependencies to be used by feature domains.
 public struct SystemEnvironment<Environment> {
     public var environment: Environment
     public var mainQueue: AnySchedulerOf<DispatchQueue>
+    public var placesAPI: PlacesAPI
 
     public init(
         environment: Environment,
-        mainQueue: AnySchedulerOf<DispatchQueue>) {
+        mainQueue: AnySchedulerOf<DispatchQueue>,
+        placesAPI: PlacesAPI) {
             self.environment = environment
             self.mainQueue = mainQueue
+            self.placesAPI = placesAPI
         }
 
     public static func mock(
         _ environment: Environment,
-        queue: AnySchedulerOf<DispatchQueue> = .immediate) -> Self {
+        queue: AnySchedulerOf<DispatchQueue> = .immediate,
+        placesAPI: PlacesAPI = PlacesAPI(baseURL: URL(string: "")!, apiKey: "")) -> Self {
             Self(
                 environment: environment,
-                mainQueue: queue)
+                mainQueue: queue,
+                placesAPI: placesAPI)
         }
 
     /// A convenience dynamic member lookup allowing for simplified callsite semantics, effectively omitting "environment" when accessing a member of `Environment`
@@ -45,6 +51,7 @@ public struct SystemEnvironment<Environment> {
     ) -> SystemEnvironment<NewEnvironment> {
         .init(
             environment: transform(environment),
-            mainQueue: mainQueue)
+            mainQueue: mainQueue,
+            placesAPI: placesAPI)
     }
 }

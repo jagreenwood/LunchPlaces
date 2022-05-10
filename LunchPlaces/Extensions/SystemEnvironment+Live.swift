@@ -11,5 +11,6 @@ extension SystemEnvironment {
     static func live(_ environment: Environment) -> Self {
         Self(
             environment: environment,
-            mainQueue: DispatchQueue.main.eraseToAnyScheduler())
+            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+            placesAPI: PlacesAPI(baseURL: URL(string: "")!, apiKey: ""))
     }}
