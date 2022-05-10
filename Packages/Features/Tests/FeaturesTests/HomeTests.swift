@@ -11,7 +11,11 @@ import XCTest
 @testable import Home
 
 extension HomeDomain.Environment {
-    static let failing = Self(locationServiceEnvironment: .mock)
+    static let failing = Self(
+        locationServiceEnvironment: .mock,
+        nearbySearch: { _, _ in .failing("Uncallable") },
+        textSearch: { _, _, _ in .failing("Uncallable") }
+    )
 }
 
 final class HomeDomainTests: XCTestCase {

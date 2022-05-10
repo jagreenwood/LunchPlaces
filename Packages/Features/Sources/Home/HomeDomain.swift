@@ -9,7 +9,8 @@ import Common
 import ComposableArchitecture
 import Foundation
 import LocationService
-import Model
+import PlacesAPI
+import Mock
 
 public struct HomeDomain: Equatable {
     enum Route: Equatable {
@@ -41,13 +42,31 @@ public struct HomeDomain: Equatable {
 
     public struct Environment {
         var locationServiceEnvironment: LocationServiceDomain.Environment
+        var nearbySearch: (PlacesAPI, QueryParameters) -> Effect<[Place], AppError>
+        var textSearch: (PlacesAPI, String, QueryParameters) -> Effect<[Place], AppError>
 
         public static var live = Self(
-            locationServiceEnvironment: .live
+            locationServiceEnvironment: .live,
+            nearbySearch: { api, parameters in
+                api.nearbySearch(parameters)
+                    .load()
+                    .eraseToEffect()
+            },
+            textSearch: { api, text, parameters in
+                api.textSearch(text, parameters: parameters)
+                    .load()
+                    .eraseToEffect()
+            }
         )
 
         public static var mock = Self(
-            locationServiceEnvironment: .mock
+            locationServiceEnvironment: .mock,
+            nearbySearch: { _, _ in
+                Effect(value: Mock.places)
+            },
+            textSearch: { _, _, _ in
+                Effect(value: Mock.places)
+            }
         )
     }
 
