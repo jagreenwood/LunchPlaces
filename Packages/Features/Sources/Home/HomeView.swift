@@ -11,6 +11,10 @@ import SwiftUI
 public struct HomeView: View {
     let store: Store<HomeDomain.State, HomeDomain.Action>
 
+    public init(store: Store<HomeDomain.State, HomeDomain.Action>) {
+        self.store = store
+    }
+
     public var body: some View {
         WithViewStore(store) { viewStore in
             Text(viewStore.name)

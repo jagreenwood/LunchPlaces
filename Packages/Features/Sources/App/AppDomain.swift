@@ -9,38 +9,46 @@ import Common
 import ComposableArchitecture
 import Foundation
 import LocationAccess
+import Home
 
 public struct AppDomain: Equatable {
     public struct State: Equatable {
+        var homeState = HomeDomain.State()
         var locationAccessState: LocationAccessDomain.State?
         var locationServiceState = LocationServiceDomain.State()
-        public var name: String
 
-        public init(name: String = "") {
-            self.name = name
-        }
+        public init() {}
     }
 
     public enum Action: Equatable {
+        case home(HomeDomain.Action)
         case onAppear
         case locationAccess(LocationAccessDomain.Action)
         case locationService(LocationServiceDomain.Action)
     }
 
     public struct Environment {
+        var homeEnvironment: HomeDomain.Environment
         var locationAccessEnvironment: LocationAccessDomain.Environment
         var locationServiceEnvironment: LocationServiceDomain.Environment
 
         public static var live = Self(
+            homeEnvironment: .live,
             locationAccessEnvironment: .live,
             locationServiceEnvironment: .live)
 
         public static var mock = Self(
+            homeEnvironment: .mock,
             locationAccessEnvironment: .mock,
             locationServiceEnvironment: .mock)
     }
 
     public static let reducer = Reducer<State, Action, SystemEnvironment<Environment>>.combine(
+        HomeDomain.reducer
+            .pullback(
+                state: \.homeState,
+                action: /Action.home,
+                environment: { $0.map(\.homeEnvironment) }),
         LocationAccessDomain.reducer
             .optional()
             .pullback(
@@ -54,8 +62,10 @@ public struct AppDomain: Equatable {
                 environment: { $0.locationServiceEnvironment }),
         Reducer { state, action, _ in
             switch action {
+            case .home:
+                return .none
+
             case .onAppear:
-                state.name = "App"
                 return Effect(value: .locationService(.getServiceStatus))
 
             case .locationAccess(.didCompleteAuthorization):

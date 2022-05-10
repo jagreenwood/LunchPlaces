@@ -6,8 +6,9 @@
 //
 
 import ComposableArchitecture
-import SwiftUI
+import Home
 import LocationAccess
+import SwiftUI
 
 public struct AppView: View {
     let store: Store<AppDomain.State, AppDomain.Action>
@@ -19,11 +20,9 @@ public struct AppView: View {
     public var body: some View {
         WithViewStore(store) { viewStore in
             ZStack {
-                Text(viewStore.name)
-                    .padding()
-                    .onAppear {
-                        viewStore.send(.onAppear)
-                    }
+                HomeView(store: store.scope(
+                    state: \.homeState,
+                    action: AppDomain.Action.home))
 
                 IfLetStore(
                     store.scope(
