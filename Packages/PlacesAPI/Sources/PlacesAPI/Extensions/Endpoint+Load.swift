@@ -31,6 +31,8 @@ public extension Endpoint {
                             return String(data: data, encoding: .utf8)
                         case is DecodingError:
                             return (error as! DecodingError).userDescription
+                        case is AppError:
+                            return (error as! AppError).reason
                         default:
                             return nil
                         }
