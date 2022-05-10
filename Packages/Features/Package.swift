@@ -9,6 +9,7 @@ let package = Package(
     products: [
         .library(name: "App", targets: ["App"]),
         .library(name: "Common", targets: ["Common"]),
+        .library(name: "Home", targets: ["Home"]),
         .library(name: "LocationAccess", targets: ["LocationAccess"]),
         .library(name: "LocationService", targets: ["LocationService"])
     ],
@@ -36,6 +37,7 @@ let package = Package(
             name: "App",
             dependencies: [
                 "Common",
+                "Home",
                 "LocationAccess",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
@@ -54,12 +56,18 @@ let package = Package(
                 "Common",
                 .product(name: "ComposableCoreLocation", package: "composable-core-location")
             ]),
-
+        .target(
+            name: "Home",
+            dependencies: [
+                "Common",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
         .testTarget(
             name: "FeaturesTests",
             dependencies: [
                 "App",
                 "Common",
+                "Home",
                 "Mock",
                 "LocationService",
                 "LocationAccess",
