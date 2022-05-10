@@ -60,6 +60,7 @@ let package = Package(
             name: "Home",
             dependencies: [
                 "Common",
+                "LocationService",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
         .testTarget(

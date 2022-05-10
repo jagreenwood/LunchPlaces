@@ -11,7 +11,7 @@ import XCTest
 @testable import Home
 
 extension HomeDomain.Environment {
-    static let failing = Self()
+    static let failing = Self(locationServiceEnvironment: .mock)
 }
 
 final class HomeDomainTests: XCTestCase {

@@ -8,9 +8,12 @@
 import Common
 import ComposableArchitecture
 import Foundation
+import LocationService
 
 public struct HomeDomain: Equatable {
     public struct State: Equatable {
+        var locationServiceState = LocationServiceDomain.State()
+
         public var name: String
 
         public init(name: String = "") {
@@ -19,17 +22,33 @@ public struct HomeDomain: Equatable {
     }
 
     public enum Action: Equatable {
+        case locationService(LocationServiceDomain.Action)
         case onAppear
     }
 
     public struct Environment {
-        public static var live = Self()
-        public static var mock = Self()
+        var locationServiceEnvironment: LocationServiceDomain.Environment
+
+        public static var live = Self(
+            locationServiceEnvironment: .live
+        )
+
+        public static var mock = Self(
+            locationServiceEnvironment: .mock
+        )
     }
 
     public static let reducer = Reducer<State, Action, SystemEnvironment<Environment>>.combine(
+        LocationServiceDomain.reducer
+            .pullback(
+                state: \.locationServiceState,
+                action: /Action.locationService,
+                environment: { $0.locationServiceEnvironment }),
         Reducer { state, action, _ in
             switch action {
+            case .locationService:
+                return .none
+
             case .onAppear:
                 state.name = "Home"
                 return .none
