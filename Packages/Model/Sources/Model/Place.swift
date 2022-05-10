@@ -12,7 +12,7 @@ public struct Place: Codable, Equatable {
     public let formattedAddress: String?
     public let geometry: Geometry
     public let name: String
-    public let openingHours: OpeningHours
+    public let openingHours: OpeningHours?
     public let placeID: String
     public let priceLevel: Int?
     public let rating: Double?
@@ -35,7 +35,7 @@ public struct Place: Codable, Equatable {
         formattedAddress: String?,
         geometry: Geometry,
         name: String,
-        openingHours: OpeningHours,
+        openingHours: OpeningHours?,
         placeID: String,
         priceLevel: Int?,
         rating: Double?,

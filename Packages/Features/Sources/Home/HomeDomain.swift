@@ -35,7 +35,7 @@ public struct HomeDomain: Equatable {
         case binding(BindingAction<State>)
         case error(AppError?)
         case fetchLocation
-        case fetchRestaurants
+        case fetchNearbyRestaurants
         case locationService(LocationServiceDomain.Action)
         case onAppear
         case setRestaurants([Place])
@@ -90,10 +90,7 @@ public struct HomeDomain: Equatable {
             case .fetchLocation:
                 return Effect(value: .locationService(.getLocation))
 
-            case .fetchRestaurants:
-                return .none
-
-            case .locationService(.setLocation(let location)):
+            case .fetchNearbyRestaurants:
                 guard let location = state.locationServiceState.location else {
                     return .none
                 }
@@ -102,18 +99,20 @@ public struct HomeDomain: Equatable {
                     environment.placesAPI,
                     QueryParameters(
                         location: (location.coordinate.latitude, location.coordinate.longitude))
-                )
-                .map(
+                ).map(
                     scheduler: environment.mainQueue,
                     success: Action.setRestaurants,
                     failure: Action.error)
+
+            case .locationService(.setLocation(let location)):
+                return Effect(value: .fetchNearbyRestaurants)
 
             case .locationService:
                 return .none
 
             case .onAppear:
                 state.name = "Home"
-                return .none
+                return Effect(value: .locationService(.configure))
 
             case .setRestaurants(let places):
                 state.places = places
@@ -123,6 +122,6 @@ public struct HomeDomain: Equatable {
                 state.showMap.toggle()
                 return .none
             }
-        }.binding()
+        }.binding().debug()
     )
 }

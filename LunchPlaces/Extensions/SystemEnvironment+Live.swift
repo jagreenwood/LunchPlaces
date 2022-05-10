@@ -13,6 +13,6 @@ extension SystemEnvironment {
             environment: environment,
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
             placesAPI: PlacesAPI(
-                baseURL: URL(string: "https://maps.googleapis.com/maps/api/place/")!,
+                baseURL: URL(string: "https://maps.googleapis.com/maps/api/place")!,
                 apiKey: Bundle.googlePlacesKey))
     }}

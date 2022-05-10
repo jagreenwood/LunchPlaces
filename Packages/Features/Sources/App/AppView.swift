@@ -36,6 +36,8 @@ public struct AppView: View {
                     : nil,    // presenting
                     value: viewStore.locationAccessState)
                 .transition(.move(edge: .bottom))
+            }.onAppear {
+                viewStore.send(.onAppear)
             }
         }
     }

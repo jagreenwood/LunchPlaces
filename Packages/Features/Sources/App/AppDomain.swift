@@ -70,7 +70,10 @@ public struct AppDomain: Equatable {
 
             case .locationAccess(.didCompleteAuthorization):
                 state.locationAccessState = nil
-                return Effect(value: .locationService(.authorize))
+                return .merge(
+                    Effect(value: .locationService(.authorize)),
+                    Effect(value: .home(.fetchLocation))
+                )
 
             case .locationAccess:
                 return .none
@@ -80,7 +83,10 @@ public struct AppDomain: Equatable {
                     state.locationServiceState.locationServiceEnabled == true {
                     state.locationAccessState = nil // dismiss location access view
 
-                    return Effect(value: .locationService(.authorize))
+                    return .merge(
+                        Effect(value: .locationService(.authorize)),
+                        Effect(value: .home(.fetchLocation))
+                    )
                 } else {
                     state.locationAccessState = LocationAccessDomain.State(locationServiceState: state.locationServiceState)
 
