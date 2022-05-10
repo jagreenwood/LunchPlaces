@@ -19,6 +19,7 @@ public struct HomeDomain: Equatable {
 
     public struct State: Equatable {
         @BindableState var route: Route?
+        var alertState: AlertState<Action>?
         var locationServiceState = LocationServiceDomain.State()
         var places: [Place] = []
         var showMap = false
@@ -32,6 +33,7 @@ public struct HomeDomain: Equatable {
 
     public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case error(AppError?)
         case fetchLocation
         case fetchRestaurants
         case locationService(LocationServiceDomain.Action)
@@ -76,16 +78,35 @@ public struct HomeDomain: Equatable {
                 state: \.locationServiceState,
                 action: /Action.locationService,
                 environment: { $0.locationServiceEnvironment }),
-        Reducer { state, action, _ in
+        Reducer { state, action, environment in
             switch action {
             case .binding:
                 return .none
 
-            case .fetchLocation:
+            case .error(let error):
+                state.alertState = AlertState(error)
                 return .none
+
+            case .fetchLocation:
+                return Effect(value: .locationService(.getLocation))
 
             case .fetchRestaurants:
                 return .none
+
+            case .locationService(.setLocation(let location)):
+                guard let location = state.locationServiceState.location else {
+                    return .none
+                }
+
+                return environment.nearbySearch(
+                    environment.placesAPI,
+                    QueryParameters(
+                        location: (location.coordinate.latitude, location.coordinate.longitude))
+                )
+                .map(
+                    scheduler: environment.mainQueue,
+                    success: Action.setRestaurants,
+                    failure: Action.error)
 
             case .locationService:
                 return .none

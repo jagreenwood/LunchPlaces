@@ -15,9 +15,9 @@ public struct QueryParameters {
 
     public init(
         location: (lat: Double, long: Double),
-        pageToken: String?,
-        radius: Double,
-        type: String) {
+        pageToken: String? = nil,
+        radius: Double = 10_000,
+        type: String = "restaurant") {
             self.location = location
             self.pageToken = pageToken
             self.radius = radius

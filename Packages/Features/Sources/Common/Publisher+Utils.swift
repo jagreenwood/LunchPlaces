@@ -57,4 +57,3 @@ public extension Publisher where Self.Failure == AppError {
                 }.eraseToEffect()
         }
 }
-
