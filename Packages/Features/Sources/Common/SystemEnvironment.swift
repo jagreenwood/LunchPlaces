@@ -28,7 +28,7 @@ public struct SystemEnvironment<Environment> {
     public static func mock(
         _ environment: Environment,
         queue: AnySchedulerOf<DispatchQueue> = .immediate,
-        placesAPI: PlacesAPI = PlacesAPI(baseURL: URL(string: "")!, apiKey: "")) -> Self {
+        placesAPI: PlacesAPI = PlacesAPI(baseURL: URL(string: "http://www.mockapi.foo")!, apiKey: "")) -> Self {
             Self(
                 environment: environment,
                 mainQueue: queue,

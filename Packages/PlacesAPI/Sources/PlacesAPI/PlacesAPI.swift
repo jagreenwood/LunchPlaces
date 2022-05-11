@@ -46,12 +46,6 @@ public final class PlacesAPI {
         var urlParameters = parameters.dictionaryRepresentation
         appendKey(&urlParameters)
 
-//        return Endpoint<Places>(
-//            json: .get,
-//            url: url(.nearbySearch),
-//            query: urlParameters)
-//        .map(\.results)
-
         return Endpoint(
             .get,
             url: url(.nearbySearch),
@@ -78,12 +72,6 @@ public final class PlacesAPI {
         appendKey(&urlParameters)
         urlParameters[Constants.query] = text
 
-//        return Endpoint<Places>(
-//            json: .get,
-//            url: url(.textSearch),
-//            query: urlParameters)
-//        .map(\.results)
-
         return Endpoint(
             .get,
             url: url(.textSearch),
@@ -101,15 +89,6 @@ public final class PlacesAPI {
                     return places.results
                 }
         }
-
-//        return Endpoint(.post, url: url(.authenticate),
-//                        accept: .json,
-//                        contentType: .urlencoded,
-//                        body: urlencoded) { (data, response) -> Result<AuthenticationResponse, Error> in
-//            return Result {
-//                guard let dat = data else { throw NoDataError() }
-//                return try JSONDecoder().decode(AuthenticationResponse.self, from: dat)
-//            }
     }
 }
 
