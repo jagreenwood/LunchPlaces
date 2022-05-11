@@ -74,6 +74,9 @@ public struct PlaceRowView: View {
                 alignment: .center)
             .accessibilityElement(children: .combine)
             .accessibilityLabel(Text("\(viewStore.place.name)"))
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 }

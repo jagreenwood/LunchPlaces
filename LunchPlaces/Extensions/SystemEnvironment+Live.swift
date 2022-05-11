@@ -10,6 +10,7 @@ import Common
 extension SystemEnvironment {
     static func live(_ environment: Environment) -> Self {
         Self(
+            cache: UserDefaults.standard,
             environment: environment,
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
             placesAPI: PlacesAPI(

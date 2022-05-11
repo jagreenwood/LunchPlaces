@@ -16,6 +16,7 @@ let package = Package(
         .library(name: "PlaceList", targets: ["PlaceList"])
     ],
     dependencies: [
+        .package(path: "../Cache"),
         .package(path: "../Core"),
         .package(path: "../Localization"),
         .package(path: "../Mock"),
@@ -78,6 +79,7 @@ let package = Package(
             dependencies: [
                 "Common",
                 "Localization",
+                "Cache",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
         .testTarget(
