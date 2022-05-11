@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import SwiftUI
 import PlaceList
+import Localization
 
 public struct HomeView: View {
     let store: Store<HomeDomain.State, HomeDomain.Action>
@@ -17,14 +18,35 @@ public struct HomeView: View {
     }
 
     public var body: some View {
-        WithViewStore(store) { viewStore in
-            ZStack {
-                PlaceListView(
-                    store: store.scope(
-                        state: \.placeListState,
-                        action: HomeDomain.Action.placeList))
-            }.onAppear {
-                viewStore.send(.onAppear)
+        NavigationView {
+            WithViewStore(store) { viewStore in
+                VStack(spacing: 0) {
+                    HStack {
+                        TextField("Search", text: .constant(""))
+                    }
+                    .padding()
+
+                    Divider()
+
+                    ZStack {
+                        PlaceListView(
+                            store: store.scope(
+                                state: \.placeListState,
+                                action: HomeDomain.Action.placeList))
+                    }.onAppear {
+                        viewStore.send(.onAppear)
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Image(systemName: "leaf.fill")
+                        Text(Localization.Generic.appName)
+                            .font(.headline)
+                    }
+                }
             }
         }
     }
