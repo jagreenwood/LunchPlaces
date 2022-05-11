@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import SwiftUI
+import PlaceList
 
 public struct HomeView: View {
     let store: Store<HomeDomain.State, HomeDomain.Action>
@@ -17,11 +18,14 @@ public struct HomeView: View {
 
     public var body: some View {
         WithViewStore(store) { viewStore in
-            Text(viewStore.name)
-                .padding()
-                .onAppear {
-                    viewStore.send(.onAppear)
-                }
+            ZStack {
+                PlaceListView(
+                    store: store.scope(
+                        state: \.placeListState,
+                        action: HomeDomain.Action.placeList))
+            }.onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 }

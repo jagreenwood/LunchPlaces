@@ -24,6 +24,11 @@ public struct Localization {
     public struct Home {
         public static let searchPlaceholder = NSLocalizedString("Home.searchPlaceholder", bundle: .strings, comment: "")
     }
+
+    public struct Place {
+        public static let open = NSLocalizedString("Place.open", bundle: .strings, comment: "")
+        public static let closed = NSLocalizedString("Place.closed", bundle: .strings, comment: "")
+    }
 }
 
 private class FindMyBundle {}

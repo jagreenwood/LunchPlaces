@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3F1A1718282B073E0037A463 /* Bundle+Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1A1717282B073E0037A463 /* Bundle+Key.swift */; };
+		3F1A171A282BBEE70037A463 /* PlaceList in Frameworks */ = {isa = PBXBuildFile; productRef = 3F1A1719282BBEE70037A463 /* PlaceList */; };
+		3F1A171C282BBEED0037A463 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = 3F1A171B282BBEED0037A463 /* Home */; };
+		3F1A171E282BBEF40037A463 /* LocationAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 3F1A171D282BBEF40037A463 /* LocationAccess */; };
+		3F1A1720282BBEF40037A463 /* LocationService in Frameworks */ = {isa = PBXBuildFile; productRef = 3F1A171F282BBEF40037A463 /* LocationService */; };
 		3F2605BA2826FB280055E25B /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605B92826FB280055E25B /* Common */; };
 		3F2605BD2826FF760055E25B /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605BC2826FF760055E25B /* Localization */; };
 		3F2605C1282707590055E25B /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 3F2605C0282707590055E25B /* UIComponents */; };
@@ -61,14 +65,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F2605C3282709B70055E25B /* App in Frameworks */,
+				3F1A171E282BBEF40037A463 /* LocationAccess in Frameworks */,
 				3F2605C1282707590055E25B /* UIComponents in Frameworks */,
 				3F736D7F282530E300296D67 /* Model in Frameworks */,
 				3F2605BD2826FF760055E25B /* Localization in Frameworks */,
+				3F1A171A282BBEE70037A463 /* PlaceList in Frameworks */,
 				3F423A2F282542CE00702264 /* PlacesAPI in Frameworks */,
 				3F736D8228253B6E00296D67 /* Cache in Frameworks */,
 				3F736D7D282530E300296D67 /* Mock in Frameworks */,
 				3F736D7B282530E300296D67 /* Core in Frameworks */,
 				3F2605BA2826FB280055E25B /* Common in Frameworks */,
+				3F1A1720282BBEF40037A463 /* LocationService in Frameworks */,
+				3F1A171C282BBEED0037A463 /* Home in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +197,10 @@
 				3F2605BC2826FF760055E25B /* Localization */,
 				3F2605C0282707590055E25B /* UIComponents */,
 				3F2605C2282709B70055E25B /* App */,
+				3F1A1719282BBEE70037A463 /* PlaceList */,
+				3F1A171B282BBEED0037A463 /* Home */,
+				3F1A171D282BBEF40037A463 /* LocationAccess */,
+				3F1A171F282BBEF40037A463 /* LocationService */,
 			);
 			productName = LunchPlaces;
 			productReference = 3FD5D33328245D6400F0C100 /* LunchPlaces.app */;
@@ -571,6 +583,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3F1A1719282BBEE70037A463 /* PlaceList */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PlaceList;
+		};
+		3F1A171B282BBEED0037A463 /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
+		3F1A171D282BBEF40037A463 /* LocationAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocationAccess;
+		};
+		3F1A171F282BBEF40037A463 /* LocationService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocationService;
+		};
 		3F2605B92826FB280055E25B /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;

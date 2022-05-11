@@ -11,9 +11,12 @@ let package = Package(
         .library(name: "Common", targets: ["Common"]),
         .library(name: "Home", targets: ["Home"]),
         .library(name: "LocationAccess", targets: ["LocationAccess"]),
-        .library(name: "LocationService", targets: ["LocationService"])
+        .library(name: "LocationService", targets: ["LocationService"]),
+        .library(name: "PlaceRow", targets: ["PlaceRow"]),
+        .library(name: "PlaceList", targets: ["PlaceList"])
     ],
     dependencies: [
+        .package(path: "../Cache"),
         .package(path: "../Core"),
         .package(path: "../Localization"),
         .package(path: "../Mock"),
@@ -61,6 +64,22 @@ let package = Package(
             dependencies: [
                 "Common",
                 "LocationService",
+                "PlaceList",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
+        .target(
+            name: "PlaceList",
+            dependencies: [
+                "Common",
+                "PlaceRow",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
+        .target(
+            name: "PlaceRow",
+            dependencies: [
+                "Common",
+                "Localization",
+                "Cache",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
         .testTarget(
@@ -72,6 +91,8 @@ let package = Package(
                 "Mock",
                 "LocationService",
                 "LocationAccess",
+                "PlaceList",
+                "PlaceRow",
                 .product(name: "Overture", package: "swift-overture")
             ])
     ]

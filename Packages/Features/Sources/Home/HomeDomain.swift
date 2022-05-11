@@ -9,8 +9,9 @@ import Common
 import ComposableArchitecture
 import Foundation
 import LocationService
-import PlacesAPI
 import Mock
+import PlaceList
+import PlacesAPI
 
 public struct HomeDomain: Equatable {
     enum Route: Equatable {
@@ -21,7 +22,12 @@ public struct HomeDomain: Equatable {
         @BindableState var route: Route?
         var alertState: AlertState<Action>?
         var locationServiceState = LocationServiceDomain.State()
-        var places: [Place] = []
+        var placeListState = PlaceListDomain.State()
+        var places: [Place] = [] {
+            didSet {
+                placeListState.places = places
+            }
+        }
         var showMap = false
 
         public var name: String
@@ -37,6 +43,7 @@ public struct HomeDomain: Equatable {
         case fetchLocation
         case fetchNearbyRestaurants
         case locationService(LocationServiceDomain.Action)
+        case placeList(PlaceListDomain.Action)
         case onAppear
         case setRestaurants([Place])
         case toggleMap
@@ -44,11 +51,13 @@ public struct HomeDomain: Equatable {
 
     public struct Environment {
         var locationServiceEnvironment: LocationServiceDomain.Environment
+        var placeListEnvironment: PlaceListDomain.Environment
         var nearbySearch: (PlacesAPI, QueryParameters) -> Effect<[Place], AppError>
         var textSearch: (PlacesAPI, String, QueryParameters) -> Effect<[Place], AppError>
 
         public static var live = Self(
             locationServiceEnvironment: .live,
+            placeListEnvironment: .live,
             nearbySearch: { api, parameters in
                 api.nearbySearch(parameters)
                     .load()
@@ -63,6 +72,7 @@ public struct HomeDomain: Equatable {
 
         public static var mock = Self(
             locationServiceEnvironment: .mock,
+            placeListEnvironment: .mock,
             nearbySearch: { _, _ in
                 Effect(value: Mock.places)
             },
@@ -78,6 +88,11 @@ public struct HomeDomain: Equatable {
                 state: \.locationServiceState,
                 action: /Action.locationService,
                 environment: { $0.locationServiceEnvironment }),
+        PlaceListDomain.reducer
+            .pullback(
+                state: \.placeListState,
+                action: /Action.placeList,
+                environment: { $0.map(\.placeListEnvironment) }),
         Reducer { state, action, environment in
             switch action {
             case .binding:
@@ -110,6 +125,9 @@ public struct HomeDomain: Equatable {
             case .locationService:
                 return .none
 
+            case .placeList:
+                return .none
+
             case .onAppear:
                 state.name = "Home"
                 return Effect(value: .locationService(.configure))
@@ -122,6 +140,6 @@ public struct HomeDomain: Equatable {
                 state.showMap.toggle()
                 return .none
             }
-        }.binding().debug()
+        }.binding()
     )
 }

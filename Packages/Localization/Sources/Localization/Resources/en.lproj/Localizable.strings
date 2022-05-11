@@ -8,3 +8,6 @@
 "LocationAccess.buttonTitle" = "Authorize";
 
 "Home.searchPlaceholder" = "Search for a restaurant";
+
+"Place.open" = "open";
+"Place.closed" = "closed";
