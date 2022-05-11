@@ -17,7 +17,7 @@ public struct PlaceRowView: View {
 
     public var body: some View {
         WithViewStore(store) { viewStore in
-            Text(viewStore.name)
+            Text(viewStore.place.name)
                 .padding()
                 .onAppear {
                     viewStore.send(.onAppear)
@@ -27,11 +27,13 @@ public struct PlaceRowView: View {
 }
 
 #if DEBUG
+import Mock
+
 struct PlaceRowView_Previews: PreviewProvider {
     static var previews: some View {
         PlaceRowView(
             store: Store(
-                initialState: PlaceRowDomain.State(),
+                initialState: PlaceRowDomain.State(place: Mock.places.first!),
                 reducer: PlaceRowDomain.reducer,
                 environment: .mock(.mock))
         )

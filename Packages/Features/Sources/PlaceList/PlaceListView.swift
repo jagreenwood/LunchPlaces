@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import PlaceRow
 import SwiftUI
 
 public struct PlaceListView: View {
@@ -19,9 +20,12 @@ public struct PlaceListView: View {
         WithViewStore(store) { viewStore in
             ScrollView {
                 LazyVStack(spacing: 20) {
-                    ForEach(viewStore.places) { place in
-                        Text(place.name)
-                    }
+                    ForEachStore(
+                        store.scope(
+                            state: \.placeRowStates,
+                            action: PlaceListDomain.Action.placeRow(id:action:)),
+                        content: PlaceRowView.init(store:)
+                    )
                 }.padding()
             }
         }
