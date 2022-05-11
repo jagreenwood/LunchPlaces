@@ -17,11 +17,13 @@ public struct PlaceListView: View {
 
     public var body: some View {
         WithViewStore(store) { viewStore in
-            Text(viewStore.name)
-                .padding()
-                .onAppear {
-                    viewStore.send(.onAppear)
-                }
+            ScrollView {
+                LazyVStack(spacing: 20) {
+                    ForEach(viewStore.places) { place in
+                        Text(place.name)
+                    }
+                }.padding()
+            }
         }
     }
 }

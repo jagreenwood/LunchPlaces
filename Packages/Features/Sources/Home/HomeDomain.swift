@@ -23,7 +23,11 @@ public struct HomeDomain: Equatable {
         var alertState: AlertState<Action>?
         var locationServiceState = LocationServiceDomain.State()
         var placeListState = PlaceListDomain.State()
-        var places: [Place] = []
+        var places: [Place] = [] {
+            didSet {
+                placeListState.places = places
+            }
+        }
         var showMap = false
 
         public var name: String

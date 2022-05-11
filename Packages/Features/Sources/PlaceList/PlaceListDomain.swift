@@ -8,13 +8,14 @@
 import Common
 import ComposableArchitecture
 import Foundation
+import Model
 
 public struct PlaceListDomain: Equatable {
     public struct State: Equatable {
-        public var name: String
+        public var places: [Place]
 
-        public init(name: String = "") {
-            self.name = name
+        public init(places: [Place] = []) {
+            self.places = places
         }
     }
 
@@ -31,7 +32,6 @@ public struct PlaceListDomain: Equatable {
         Reducer { state, action, _ in
             switch action {
             case .onAppear:
-                state.name = "PlaceList"
                 return .none
             }
         }
