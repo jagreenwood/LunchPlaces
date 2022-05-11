@@ -12,6 +12,7 @@ let package = Package(
         .library(name: "Home", targets: ["Home"]),
         .library(name: "LocationAccess", targets: ["LocationAccess"]),
         .library(name: "LocationService", targets: ["LocationService"]),
+        .library(name: "PlaceRow", targets: ["PlaceRow"]),
         .library(name: "PlaceList", targets: ["PlaceList"])
     ],
     dependencies: [
@@ -69,6 +70,13 @@ let package = Package(
             name: "PlaceList",
             dependencies: [
                 "Common",
+                "PlaceRow",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
+        .target(
+            name: "PlaceRow",
+            dependencies: [
+                "Common",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
         .testTarget(
@@ -81,6 +89,7 @@ let package = Package(
                 "LocationService",
                 "LocationAccess",
                 "PlaceList",
+                "PlaceRow",
                 .product(name: "Overture", package: "swift-overture")
             ])
     ]
