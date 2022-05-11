@@ -140,6 +140,6 @@ public struct HomeDomain: Equatable {
                 state.showMap.toggle()
                 return .none
             }
-        }.binding().debug()
+        }.binding()
     )
 }

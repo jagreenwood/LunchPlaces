@@ -77,6 +77,7 @@ let package = Package(
             name: "PlaceRow",
             dependencies: [
                 "Common",
+                "Localization",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
         .testTarget(
