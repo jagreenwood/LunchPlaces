@@ -11,7 +11,9 @@ import XCTest
 @testable import PlaceList
 
 extension PlaceListDomain.Environment {
-    static let failing = Self()
+    static let failing = Self(
+        placeRowEnvironment: .mock
+    )
 }
 
 final class PlaceListDomainTests: XCTestCase {
@@ -21,8 +23,6 @@ final class PlaceListDomainTests: XCTestCase {
             reducer: PlaceListDomain.reducer,
             environment: .mock(.failing))
 
-        store.send(.onAppear) {
-            $0.name = "PlaceList"
-        }
+        store.send(.onAppear)
     }
 }

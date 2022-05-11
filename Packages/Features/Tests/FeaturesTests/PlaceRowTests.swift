@@ -7,22 +7,28 @@
 
 import ComposableArchitecture
 import Overture
+import Mock
 import XCTest
 @testable import PlaceRow
 
 extension PlaceRowDomain.Environment {
-    static let failing = Self()
+    static let failing = Self(
+        isFavorite: { _, _ throws in fatalError("Uncallable") },
+        toggleFavorite: { _, _ throws in fatalError("Uncallable") })
 }
 
 final class PlaceRowDomainTests: XCTestCase {
     func testName() throws {
         let store = TestStore(
-            initialState: PlaceRowDomain.State(),
+            initialState: PlaceRowDomain.State(
+                place: Mock.places[0]),
             reducer: PlaceRowDomain.reducer,
-            environment: .mock(.failing))
+            environment: .mock(update(.failing) {
+                $0.isFavorite = { _, _ in true }
+            }))
 
         store.send(.onAppear) {
-            $0.name = "PlaceRow"
+            $0.isFavorite = true
         }
     }
 }
