@@ -10,14 +10,14 @@ import Foundation
 public struct QueryParameters {
     let location: (lat: Double, long: Double)
     let pageToken: String?
-    let radius: Double
+    let radius: Int
     let type: String
 
     public init(
         location: (lat: Double, long: Double),
-        pageToken: String?,
-        radius: Double,
-        type: String) {
+        pageToken: String? = nil,
+        radius: Int = 10_000,
+        type: String = "restaurant") {
             self.location = location
             self.pageToken = pageToken
             self.radius = radius
@@ -27,8 +27,7 @@ public struct QueryParameters {
 
 extension QueryParameters {
     var dictionaryRepresentation: [String: String] {
-        ["latitude": String(location.lat),
-         "longitude": String(location.long),
+        ["location": "\(String(location.lat)),\(String(location.long))",
          "pagetoken": pageToken,
          "radius": String(radius),
          "type": type]

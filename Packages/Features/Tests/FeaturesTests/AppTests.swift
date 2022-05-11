@@ -13,12 +13,13 @@ import XCTest
 
 extension AppDomain.Environment {
     static var failing = Self(
+        homeEnvironment: .mock,
         locationAccessEnvironment: .mock,
         locationServiceEnvironment: .mock)
 }
 
 final class AppDomainTests: XCTestCase {
-    func testName() throws {
+    func testOnAppear() throws {
         let store = TestStore(
             initialState: AppDomain.State(),
             reducer: AppDomain.reducer.debug(),
@@ -26,9 +27,7 @@ final class AppDomainTests: XCTestCase {
 
             }))
 
-        store.send(.onAppear) {
-            $0.name = "App"
-        }
+        store.send(.onAppear)
         store.receive(.locationService(.getServiceStatus))
         store.receive(.locationService(.setServiceStatus(.notDetermined, true))) {
             $0.locationAccessState = LocationAccessDomain.State(locationServiceState: $0.locationServiceState)

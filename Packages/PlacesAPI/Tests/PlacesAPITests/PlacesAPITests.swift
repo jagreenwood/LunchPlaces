@@ -13,7 +13,7 @@ final class PlacesAPITests: XCTestCase {
     let parameters = QueryParameters(
         location: (10.0, 10.0),
         pageToken: "token",
-        radius: 1.0,
+        radius: 10,
         type: "type")
 
     func testNearbySearchEndpoint() {
@@ -32,8 +32,7 @@ final class PlacesAPITests: XCTestCase {
 
         let expectedURLQueryItems = [
             "key=\(Constants.apiKey)",
-            "latitude=\(parameters.location.lat)",
-            "longitude=\(parameters.location.long)",
+            "location=\(parameters.location.lat),\(parameters.location.long)",
             "pagetoken=\(parameters.pageToken ?? "")",
             "radius=\(parameters.radius)",
             "type=\(parameters.type)"
@@ -60,8 +59,7 @@ final class PlacesAPITests: XCTestCase {
 
         let expectedURLQueryItems = [
             "key=\(Constants.apiKey)",
-            "latitude=\(parameters.location.lat)",
-            "longitude=\(parameters.location.long)",
+            "location=\(parameters.location.lat),\(parameters.location.long)",
             "pagetoken=\(parameters.pageToken ?? "")",
             "query=\(Constants.queryTerm)",
             "radius=\(parameters.radius)",
