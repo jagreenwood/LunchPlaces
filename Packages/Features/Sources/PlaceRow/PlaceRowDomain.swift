@@ -18,6 +18,7 @@ public struct PlaceRowDomain: Equatable {
         public var id: String { place.placeID }
         public var place: Place
         public var isFavorite: Bool
+        var alertState: AlertState<Action>?
 
         public init(place: Place, isFavorite: Bool) {
             self.place = place
@@ -44,43 +45,58 @@ public struct PlaceRowDomain: Equatable {
     }
 
     public enum Action: Equatable {
+        case error(AppError?)
         case onAppear
         case toggleFavorite
     }
 
     public struct Environment {
-        var isFavorite: (Caching, String) -> Bool
-        var toggleFavorite: (Caching, String) -> Void
+        var isFavorite: (Caching, String) throws -> Bool
+        var toggleFavorite: (Caching, String) throws -> Void
 
         public static var live = Self(
-            isFavorite: { cache, id in
-                FavoriteManager(cache: cache)
+            isFavorite: { cache, id throws in
+                try FavoriteManager(cache: cache)
                     .isFavorite(id: id)
             },
-            toggleFavorite: { cache, id in
-                FavoriteManager(cache: cache)
+            toggleFavorite: { cache, id throws in
+                try FavoriteManager(cache: cache)
                     .toggleFavorite(id: id)
             })
 
         public static var mock = Self(
-            isFavorite: { _, _ in false },
-            toggleFavorite: { _, _ in })
+            isFavorite: { _, _ throws in false },
+            toggleFavorite: { _, _ throws in })
     }
 
     public static let reducer = Reducer<State, Action, SystemEnvironment<Environment>> { state, action, environment in
         switch action {
+        case .error(let error):
+            state.alertState = AlertState(error)
+            return .none
+
         case .onAppear:
-            state.isFavorite = environment.isFavorite(
-                environment.cache,
-                state.place.placeID)
+            do {
+                state.isFavorite = try environment.isFavorite(
+                    environment.cache,
+                    state.place.placeID)
+            } catch let error as AppError {
+                return Effect(value: .error(error))
+            } catch {}
+
             return .none
 
         case .toggleFavorite:
             state.isFavorite.toggle()
-            environment.toggleFavorite(
-                environment.cache,
-                state.place.placeID
-            )
+            do {
+                try environment.toggleFavorite(
+                    environment.cache,
+                    state.place.placeID
+                )
+            } catch let error as AppError {
+                return Effect(value: .error(error))
+            } catch {}
+
             return .none
         }
     }

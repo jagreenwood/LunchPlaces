@@ -16,17 +16,17 @@ public struct FavoriteManager {
         self.cache = cache
     }
 
-    public func isFavorite(id: String) -> Bool {
-        guard let favorites: [String] = try? cache.object(key: cacheKey) else {
+    public func isFavorite(id: String) throws -> Bool {
+        guard let favorites: [String] = try cache.object(key: cacheKey) else {
             return false
         }
 
         return favorites.contains(id)
     }
 
-    public func toggleFavorite(id: String) {
-        var favorites: Set<String> = {
-            guard let favorites: Set<String> = try? cache.object(key: cacheKey) else {
+    public func toggleFavorite(id: String) throws {
+        var favorites: Set<String> = try {
+            guard let favorites: Set<String> = try cache.object(key: cacheKey) else {
                 return []
             }
 

@@ -62,6 +62,9 @@ public struct PlaceRowView: View {
                             .foregroundColor(.red)
                     })
             }
+            .alert(
+                store.scope(state: \.alertState),
+                dismiss: PlaceRowDomain.Action.error(nil))
             .frame(maxWidth: .infinity)
             .padding()
             .background(
