@@ -22,6 +22,7 @@ public struct HomeDomain: Equatable {
     }
 
     public struct State: Equatable {
+        @BindableState var isLoading = false
         @BindableState var route: Route?
         @BindableState var mapCooridinate: MKCoordinateRegion = MKCoordinateRegion(
             center: CLLocationCoordinate2D(
@@ -41,11 +42,7 @@ public struct HomeDomain: Equatable {
         }
         var showMap = false
 
-        public var name: String
-
-        public init(name: String = "") {
-            self.name = name
-        }
+        public init() {}
     }
 
     public enum Action: BindableAction, Equatable {
@@ -135,6 +132,8 @@ public struct HomeDomain: Equatable {
                     return .none
                 }
 
+                state.isLoading = true
+
                 return environment.nearbySearch(
                     environment.placesAPI,
                     QueryParameters(
@@ -164,10 +163,10 @@ public struct HomeDomain: Equatable {
                 return .none
 
             case .onAppear:
-                state.name = "Home"
                 return Effect(value: .locationService(.configure))
 
             case .setRestaurants(let places):
+                state.isLoading = false
                 state.places = places
                 return .none
 
@@ -184,6 +183,8 @@ public struct HomeDomain: Equatable {
                 guard !state.searchText.isEmpty else {
                     return Effect(value: .fetchNearbyRestaurants)
                 }
+
+                state.isLoading = true
 
                 return environment.textSearch(
                     environment.placesAPI,

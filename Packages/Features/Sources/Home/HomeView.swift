@@ -14,7 +14,6 @@ import UIComponents
 
 public struct HomeView: View {
     let store: Store<HomeDomain.State, HomeDomain.Action>
-    @FocusState private var isSearchFocused: Bool
 
     public init(store: Store<HomeDomain.State, HomeDomain.Action>) {
         self.store = store
@@ -23,81 +22,45 @@ public struct HomeView: View {
     public var body: some View {
         NavigationView {
             WithViewStore(store) { viewStore in
-                VStack(spacing: 0) {
-                    ZStack(alignment: .trailing) {
-                        TextField(Localization.Home.searchPlaceholder, text: viewStore.binding(\.$searchText))
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 10)
-                            .background(Color.appBackground)
-                            .cornerRadius(10)
-                            .focused($isSearchFocused)
-                            .onSubmit {
-                                viewStore.send(.submitSearch)
+                ZStack {
+                    VStack(spacing: 0) {
+                        Self.textField(viewStore)
+
+                        Divider()
+
+                        ZStack(alignment: .bottom) {
+                            if viewStore.showMap {
+                                Self.mapView(viewStore)
+                            } else {
+                                PlaceListView(
+                                    store: store.scope(
+                                        state: \.placeListState,
+                                        action: HomeDomain.Action.placeList))
                             }
 
-                        if !viewStore.searchText.isEmpty {
                             Button(action: {
-                                viewStore.send(.clearSearch)
+                                viewStore.send(.toggleMap)
                             }, label: {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.secondary)
-                                    .padding(.trailing)
+                                Label(
+                                    viewStore.showMap ? Localization.Home.list : Localization.Home.map,
+                                    systemImage: viewStore.showMap ? "list.bullet" : "map")
                             })
+                            .buttonStyle(ConfirmButtonStyle(showShadow: true))
+                            .padding(.bottom)
+                        }.onAppear {
+                            viewStore.send(.onAppear)
                         }
                     }
-                    .padding()
-
-                    Divider()
-
-                    ZStack(alignment: .bottom) {
-                        if viewStore.showMap {
-                            Map(
-                                coordinateRegion: viewStore.binding(\.$mapCooridinate),
-                                interactionModes: [.all],
-                                showsUserLocation: true,
-                                annotationItems: viewStore.places,
-                                annotationContent: { place in
-                                    MapAnnotation(coordinate: CLLocationCoordinate2D(
-                                        latitude: place.geometry.location.lat,
-                                        longitude: place.geometry.location.lng)) {
-                                            Button(action: {
-                                                viewStore.send(.showDetail(place))
-                                            }, label: {
-                                                HStack {
-                                                    PlaceComponent(place: place)
-                                                }
-                                                .padding()
-                                                .background(Color.appPrimary.colorInvert())
-                                                .cornerRadius(10.0)
-                                                .scaleEffect(0.6)
-                                            }).buttonStyle(.plain)
-                                    }
-                                })
-                            .edgesIgnoringSafeArea([.bottom])
-                        } else {
-                            PlaceListView(
-                                store: store.scope(
-                                    state: \.placeListState,
-                                    action: HomeDomain.Action.placeList))
+                    .sheet(item: viewStore.binding(\.$route)) { route in
+                        switch route {
+                        case .placeDetail(let place):
+                            Text(place.name)
                         }
-
-                        Button(action: {
-                            viewStore.send(.toggleMap)
-                        }, label: {
-                            Label(
-                                viewStore.showMap ? Localization.Home.list : Localization.Home.map,
-                                systemImage: viewStore.showMap ? "list.bullet" : "map")
-                        })
-                        .buttonStyle(ConfirmButtonStyle(showShadow: true))
-                        .padding(.bottom)
-                    }.onAppear {
-                        viewStore.send(.onAppear)
                     }
-                }
-                .sheet(item: viewStore.binding(\.$route)) { route in
-                    switch route {
-                    case .placeDetail(let place):
-                        Text(place.name)
+
+                    if viewStore.isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
                     }
                 }
             }
@@ -112,6 +75,58 @@ public struct HomeView: View {
                 }
             }
         }
+    }
+}
+
+extension HomeView {
+    static func textField(_ viewStore: ViewStore<HomeDomain.State, HomeDomain.Action>) -> some View {
+        ZStack(alignment: .trailing) {
+            TextField(Localization.Home.searchPlaceholder, text: viewStore.binding(\.$searchText))
+                .padding(.vertical, 8)
+                .padding(.horizontal, 10)
+                .background(Color.appBackground)
+                .cornerRadius(10)
+                .onSubmit {
+                    viewStore.send(.submitSearch)
+                }
+
+            if !viewStore.searchText.isEmpty {
+                Button(action: {
+                    viewStore.send(.clearSearch)
+                }, label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.secondary)
+                        .padding(.trailing)
+                })
+            }
+        }
+        .padding()
+    }
+
+    static func mapView(_ viewStore: ViewStore<HomeDomain.State, HomeDomain.Action>) -> some View {
+        Map(
+            coordinateRegion: viewStore.binding(\.$mapCooridinate),
+            interactionModes: [.all],
+            showsUserLocation: true,
+            annotationItems: viewStore.places,
+            annotationContent: { place in
+                MapAnnotation(coordinate: CLLocationCoordinate2D(
+                    latitude: place.geometry.location.lat,
+                    longitude: place.geometry.location.lng)) {
+                        Button(action: {
+                            viewStore.send(.showDetail(place))
+                        }, label: {
+                            HStack {
+                                PlaceComponent(place: place)
+                            }
+                            .padding()
+                            .background(Color.appPrimary.colorInvert())
+                            .cornerRadius(10.0)
+                            .scaleEffect(0.6)
+                        }).buttonStyle(.plain)
+                }
+            })
+        .edgesIgnoringSafeArea([.bottom])
     }
 }
 
