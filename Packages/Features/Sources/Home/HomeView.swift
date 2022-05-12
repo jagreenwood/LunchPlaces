@@ -46,11 +46,10 @@ public struct HomeView: View {
                                         latitude: place.geometry.location.lat,
                                         longitude: place.geometry.location.lng)) {
                                             Button(action: {
-
+                                                viewStore.send(.showDetail(place))
                                             }, label: {
                                                 HStack {
                                                     PlaceComponent(place: place)
-                                                    Image(systemName: "chevron.right")
                                                 }
                                                 .padding()
                                                 .background(Color.appPrimary.colorInvert())
@@ -77,6 +76,12 @@ public struct HomeView: View {
                         .padding(.bottom, 40)
                     }.onAppear {
                         viewStore.send(.onAppear)
+                    }
+                }
+                .sheet(item: viewStore.binding(\.$route)) { route in
+                    switch route {
+                    case .placeDetail(let place):
+                        Text(place.name)
                     }
                 }
             }

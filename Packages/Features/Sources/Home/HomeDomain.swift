@@ -15,7 +15,9 @@ import PlaceList
 import PlacesAPI
 
 public struct HomeDomain: Equatable {
-    enum Route: Equatable {
+    enum Route: Equatable, Identifiable {
+        var id: String { "\(self)" }
+
         case placeDetail(Place)
     }
 
@@ -54,6 +56,7 @@ public struct HomeDomain: Equatable {
         case placeList(PlaceListDomain.Action)
         case onAppear
         case setRestaurants([Place])
+        case showDetail(Place)
         case toggleMap
     }
 
@@ -136,6 +139,13 @@ public struct HomeDomain: Equatable {
             case .locationService:
                 return .none
 
+            case .placeList(.placeRow(let id, .rowWasSelected)):
+                guard let place = state.places.first(where: { $0.id == id }) else {
+                    return Effect(value: .error(AppError(reason: "Place cannot be found")))
+                }
+
+                return Effect(value: .showDetail(place))
+
             case .placeList:
                 return .none
 
@@ -145,6 +155,10 @@ public struct HomeDomain: Equatable {
 
             case .setRestaurants(let places):
                 state.places = places
+                return .none
+
+            case .showDetail(let place):
+                state.route = .placeDetail(place)
                 return .none
 
             case .toggleMap:

@@ -20,7 +20,7 @@ public struct PlaceRowView: View {
         WithViewStore(store) { viewStore in
             HStack(alignment: .top, spacing: 20) {
                 PlaceComponent(place: viewStore.place)
-                
+
                 Spacer()
 
                 Button(
@@ -46,6 +46,9 @@ public struct PlaceRowView: View {
                         style: .continuous).fill(Color(.systemBackground)))
                     .foregroundColor(Color.primary),
                 alignment: .center)
+            .onTapGesture {
+                viewStore.send(.rowWasSelected)
+            }
             .accessibilityElement(children: .combine)
             .accessibilityLabel(Text("\(viewStore.place.name)"))
             .onAppear {
