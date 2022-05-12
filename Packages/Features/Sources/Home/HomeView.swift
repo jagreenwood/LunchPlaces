@@ -34,7 +34,7 @@ public struct HomeView: View {
 
                     Divider()
 
-                    ZStack {
+                    ZStack(alignment: .bottom) {
                         if viewStore.showMap {
                             Map(
                                 coordinateRegion: viewStore.binding(\.$mapCooridinate),
@@ -65,6 +65,16 @@ public struct HomeView: View {
                                     state: \.placeListState,
                                     action: HomeDomain.Action.placeList))
                         }
+
+                        Button(action: {
+                            viewStore.send(.toggleMap)
+                        }, label: {
+                            Label(
+                                viewStore.showMap ? "List" : "Map",
+                                systemImage: viewStore.showMap ? "list.bullet" : "map")
+                        })
+                        .buttonStyle(ConfirmButtonStyle(showShadow: true))
+                        .padding(.bottom, 40)
                     }.onAppear {
                         viewStore.send(.onAppear)
                     }
