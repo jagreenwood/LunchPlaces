@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import SwiftUI
+import UIComponents
 
 public struct PlaceRowView: View {
     let store: Store<PlaceRowDomain.State, PlaceRowDomain.Action>
@@ -18,38 +19,8 @@ public struct PlaceRowView: View {
     public var body: some View {
         WithViewStore(store) { viewStore in
             HStack(alignment: .top, spacing: 20) {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(viewStore.place.name)
-                        .font(.title2)
-
-                    if viewStore.state.showValue(\.rating) {
-                        HStack {
-                            HStack(spacing: 0) {
-                                ForEach(1...PlaceRowDomain.State.maxRating, id: \.self) { value in
-                                    Image(systemName: value <= viewStore.ratingValue ? "star.fill" : "star")
-                                        .foregroundColor(.yellow)
-                                }
-                            }
-
-                            if let ratingTotal = viewStore.place.userRatingsTotal {
-                                Text("(\(ratingTotal))")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                    }
-
-                    if let priceLevel = viewStore.place.priceLevel {
-                        HStack(spacing: 4) {
-                            Text(Array(repeating: "$", count: priceLevel).joined())
-
-                            if let openingHours = viewStore.place.openingHours {
-                                Text("• \(openingHours.openNow ? "open" : "closed")")
-                            }
-                        }.font(.subheadline)
-                    }
-                }
-
+                PlaceComponent(place: viewStore.place)
+                
                 Spacer()
 
                 Button(

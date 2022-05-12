@@ -9,6 +9,7 @@ import Common
 import ComposableArchitecture
 import Foundation
 import LocationService
+import MapKit
 import Mock
 import PlaceList
 import PlacesAPI
@@ -20,6 +21,13 @@ public struct HomeDomain: Equatable {
 
     public struct State: Equatable {
         @BindableState var route: Route?
+        @BindableState var mapCooridinate: MKCoordinateRegion = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(
+                latitude: 0.0,
+                longitude: 0.0),
+            span: MKCoordinateSpan(
+                latitudeDelta: 0.012,
+                longitudeDelta: 0.012))
         var alertState: AlertState<Action>?
         var locationServiceState = LocationServiceDomain.State()
         var placeListState = PlaceListDomain.State()
@@ -120,6 +128,9 @@ public struct HomeDomain: Equatable {
                     failure: Action.error)
 
             case .locationService(.setLocation(let location)):
+                state.mapCooridinate.center = CLLocationCoordinate2D(
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude)
                 return Effect(value: .fetchNearbyRestaurants)
 
             case .locationService:
@@ -142,4 +153,11 @@ public struct HomeDomain: Equatable {
             }
         }.binding()
     )
+}
+
+extension MKCoordinateRegion: Equatable {
+    public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
+        lhs.center.latitude == rhs.center.latitude &&
+        lhs.center.longitude == rhs.center.longitude
+    }
 }

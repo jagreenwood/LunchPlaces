@@ -12,7 +12,8 @@ let package = Package(
             targets: ["UIComponents"])
     ],
     dependencies: [
-        .package(path: "../Localization")
+        .package(path: "../Localization"),
+        .package(path: "../Model")
     ],
     targets: [
         .target(
