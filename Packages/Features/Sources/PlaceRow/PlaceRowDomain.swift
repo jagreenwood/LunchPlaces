@@ -47,6 +47,7 @@ public struct PlaceRowDomain: Equatable {
     public enum Action: Equatable {
         case error(AppError?)
         case onAppear
+        case rowWasSelected
         case toggleFavorite
     }
 
@@ -84,6 +85,9 @@ public struct PlaceRowDomain: Equatable {
                 return Effect(value: .error(error))
             } catch {}
 
+            return .none
+
+        case .rowWasSelected:
             return .none
 
         case .toggleFavorite:

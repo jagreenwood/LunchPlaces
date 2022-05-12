@@ -28,9 +28,7 @@ final class HomeDomainTests: XCTestCase {
             reducer: HomeDomain.reducer,
             environment: .mock(.failing))
 
-        store.send(.onAppear) {
-            $0.name = "Home"
-        }
+        store.send(.onAppear)
         store.receive(.locationService(.configure))
     }
 
@@ -68,8 +66,11 @@ final class HomeDomainTests: XCTestCase {
                 $0.nearbySearch = { _, _ in Effect(value: Mock.places) }
             }))
 
-        store.send(.fetchNearbyRestaurants)
+        store.send(.fetchNearbyRestaurants) {
+            $0.isLoading = true
+        }
         store.receive(.setRestaurants(Mock.places)) {
+            $0.isLoading = false
             $0.places = Mock.places
         }
     }

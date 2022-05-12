@@ -63,6 +63,7 @@ let package = Package(
             name: "Home",
             dependencies: [
                 "Common",
+                "Localization",
                 "LocationService",
                 "PlaceList",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")

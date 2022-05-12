@@ -52,6 +52,13 @@ public struct Place: Codable, Equatable {
         }
 }
 
+extension Place: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(placeID)
+        hasher.combine(name)
+    }
+}
+
 public enum BusinessStatus: String, Codable {
     case operational = "OPERATIONAL"
     case closedTemporarily = "CLOSED_TEMPORARILY"

@@ -9,17 +9,29 @@ import Common
 import ComposableArchitecture
 import Foundation
 import LocationService
+import MapKit
 import Mock
 import PlaceList
 import PlacesAPI
 
 public struct HomeDomain: Equatable {
-    enum Route: Equatable {
+    enum Route: Equatable, Identifiable {
+        var id: String { "\(self)" }
+
         case placeDetail(Place)
     }
 
     public struct State: Equatable {
+        @BindableState var isLoading = false
         @BindableState var route: Route?
+        @BindableState var mapCooridinate: MKCoordinateRegion = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(
+                latitude: 0.0,
+                longitude: 0.0),
+            span: MKCoordinateSpan(
+                latitudeDelta: 0.012,
+                longitudeDelta: 0.012))
+        @BindableState var searchText: String = ""
         var alertState: AlertState<Action>?
         var locationServiceState = LocationServiceDomain.State()
         var placeListState = PlaceListDomain.State()
@@ -30,15 +42,12 @@ public struct HomeDomain: Equatable {
         }
         var showMap = false
 
-        public var name: String
-
-        public init(name: String = "") {
-            self.name = name
-        }
+        public init() {}
     }
 
     public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case clearSearch
         case error(AppError?)
         case fetchLocation
         case fetchNearbyRestaurants
@@ -46,6 +55,8 @@ public struct HomeDomain: Equatable {
         case placeList(PlaceListDomain.Action)
         case onAppear
         case setRestaurants([Place])
+        case showDetail(Place)
+        case submitSearch
         case toggleMap
     }
 
@@ -95,8 +106,19 @@ public struct HomeDomain: Equatable {
                 environment: { $0.map(\.placeListEnvironment) }),
         Reducer { state, action, environment in
             switch action {
+            case .binding(\.$searchText):
+                guard state.searchText.isEmpty else {
+                    return .none
+                }
+
+                return Effect(value: .fetchNearbyRestaurants)
+
             case .binding:
                 return .none
+
+            case .clearSearch:
+                state.searchText = ""
+                return Effect(value: .fetchNearbyRestaurants)
 
             case .error(let error):
                 state.alertState = AlertState(error)
@@ -110,6 +132,8 @@ public struct HomeDomain: Equatable {
                     return .none
                 }
 
+                state.isLoading = true
+
                 return environment.nearbySearch(
                     environment.placesAPI,
                     QueryParameters(
@@ -120,21 +144,59 @@ public struct HomeDomain: Equatable {
                     failure: Action.error)
 
             case .locationService(.setLocation(let location)):
+                state.mapCooridinate.center = CLLocationCoordinate2D(
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude)
                 return Effect(value: .fetchNearbyRestaurants)
 
             case .locationService:
                 return .none
 
+            case .placeList(.placeRow(let id, .rowWasSelected)):
+                guard let place = state.places.first(where: { $0.id == id }) else {
+                    return Effect(value: .error(AppError(reason: "Place cannot be found")))
+                }
+
+                return Effect(value: .showDetail(place))
+
             case .placeList:
                 return .none
 
             case .onAppear:
-                state.name = "Home"
                 return Effect(value: .locationService(.configure))
 
             case .setRestaurants(let places):
+                state.isLoading = false
                 state.places = places
                 return .none
+
+            case .showDetail(let place):
+                state.route = .placeDetail(place)
+                return .none
+
+            case .submitSearch:
+                guard let location = state.locationServiceState.location else {
+                    return .none
+                }
+
+                // if search term is empty, fall back to location search
+                guard !state.searchText.isEmpty else {
+                    return Effect(value: .fetchNearbyRestaurants)
+                }
+
+                state.isLoading = true
+
+                return environment.textSearch(
+                    environment.placesAPI,
+                    state.searchText,
+                    QueryParameters(
+                        location: (
+                            location.coordinate.latitude,
+                            location.coordinate.longitude))
+                ).map(
+                    scheduler: environment.mainQueue,
+                    success: Action.setRestaurants,
+                    failure: Action.error)
 
             case .toggleMap:
                 state.showMap.toggle()
@@ -142,4 +204,11 @@ public struct HomeDomain: Equatable {
             }
         }.binding()
     )
+}
+
+extension MKCoordinateRegion: Equatable {
+    public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
+        lhs.center.latitude == rhs.center.latitude &&
+        lhs.center.longitude == rhs.center.longitude
+    }
 }

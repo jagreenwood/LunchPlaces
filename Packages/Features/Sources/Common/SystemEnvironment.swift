@@ -66,7 +66,7 @@ public struct SystemEnvironment<Environment> {
 #if DEBUG
 public struct MockCache: Caching {
     public init() {}
-    public func cache<T>(_ object: T, key: String) throws where T : Decodable, T : Encodable {}
-    public func object<T>(key: String) throws -> T? where T : Decodable, T : Encodable { nil}
+    public func cache<T>(_ object: T, key: String) throws where T: Decodable, T: Encodable {}
+    public func object<T>(key: String) throws -> T? where T: Decodable, T: Encodable { nil }
 }
 #endif
