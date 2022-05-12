@@ -14,6 +14,7 @@ import UIComponents
 
 public struct HomeView: View {
     let store: Store<HomeDomain.State, HomeDomain.Action>
+    @FocusState private var isSearchFocused: Bool
 
     public init(store: Store<HomeDomain.State, HomeDomain.Action>) {
         self.store = store
@@ -23,12 +24,26 @@ public struct HomeView: View {
         NavigationView {
             WithViewStore(store) { viewStore in
                 VStack(spacing: 0) {
-                    HStack {
-                        TextField("Search", text: .constant(""))
+                    ZStack(alignment: .trailing) {
+                        TextField(Localization.Home.searchPlaceholder, text: viewStore.binding(\.$searchText))
                             .padding(.vertical, 8)
                             .padding(.horizontal, 10)
                             .background(Color.appBackground)
                             .cornerRadius(10)
+                            .focused($isSearchFocused)
+                            .onSubmit {
+                                viewStore.send(.submitSearch)
+                            }
+
+                        if !viewStore.searchText.isEmpty {
+                            Button(action: {
+                                viewStore.send(.clearSearch)
+                            }, label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.secondary)
+                                    .padding(.trailing)
+                            })
+                        }
                     }
                     .padding()
 
@@ -58,6 +73,7 @@ public struct HomeView: View {
                                             }).buttonStyle(.plain)
                                     }
                                 })
+                            .edgesIgnoringSafeArea([.bottom])
                         } else {
                             PlaceListView(
                                 store: store.scope(
@@ -69,11 +85,11 @@ public struct HomeView: View {
                             viewStore.send(.toggleMap)
                         }, label: {
                             Label(
-                                viewStore.showMap ? "List" : "Map",
+                                viewStore.showMap ? Localization.Home.list : Localization.Home.map,
                                 systemImage: viewStore.showMap ? "list.bullet" : "map")
                         })
                         .buttonStyle(ConfirmButtonStyle(showShadow: true))
-                        .padding(.bottom, 40)
+                        .padding(.bottom)
                     }.onAppear {
                         viewStore.send(.onAppear)
                     }
@@ -85,7 +101,6 @@ public struct HomeView: View {
                     }
                 }
             }
-            .edgesIgnoringSafeArea([.bottom])
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {

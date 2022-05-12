@@ -30,6 +30,7 @@ public struct HomeDomain: Equatable {
             span: MKCoordinateSpan(
                 latitudeDelta: 0.012,
                 longitudeDelta: 0.012))
+        @BindableState var searchText: String = ""
         var alertState: AlertState<Action>?
         var locationServiceState = LocationServiceDomain.State()
         var placeListState = PlaceListDomain.State()
@@ -49,6 +50,7 @@ public struct HomeDomain: Equatable {
 
     public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case clearSearch
         case error(AppError?)
         case fetchLocation
         case fetchNearbyRestaurants
@@ -57,6 +59,7 @@ public struct HomeDomain: Equatable {
         case onAppear
         case setRestaurants([Place])
         case showDetail(Place)
+        case submitSearch
         case toggleMap
     }
 
@@ -106,8 +109,19 @@ public struct HomeDomain: Equatable {
                 environment: { $0.map(\.placeListEnvironment) }),
         Reducer { state, action, environment in
             switch action {
+            case .binding(\.$searchText):
+                guard state.searchText.isEmpty else {
+                    return .none
+                }
+
+                return Effect(value: .fetchNearbyRestaurants)
+
             case .binding:
                 return .none
+
+            case .clearSearch:
+                state.searchText = ""
+                return Effect(value: .fetchNearbyRestaurants)
 
             case .error(let error):
                 state.alertState = AlertState(error)
@@ -160,6 +174,28 @@ public struct HomeDomain: Equatable {
             case .showDetail(let place):
                 state.route = .placeDetail(place)
                 return .none
+
+            case .submitSearch:
+                guard let location = state.locationServiceState.location else {
+                    return .none
+                }
+
+                // if search term is empty, fall back to location search
+                guard !state.searchText.isEmpty else {
+                    return Effect(value: .fetchNearbyRestaurants)
+                }
+
+                return environment.textSearch(
+                    environment.placesAPI,
+                    state.searchText,
+                    QueryParameters(
+                        location: (
+                            location.coordinate.latitude,
+                            location.coordinate.longitude))
+                ).map(
+                    scheduler: environment.mainQueue,
+                    success: Action.setRestaurants,
+                    failure: Action.error)
 
             case .toggleMap:
                 state.showMap.toggle()

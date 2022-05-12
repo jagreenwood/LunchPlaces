@@ -23,6 +23,8 @@ public struct Localization {
 
     public struct Home {
         public static let searchPlaceholder = NSLocalizedString("Home.searchPlaceholder", bundle: .strings, comment: "")
+        public static let map = NSLocalizedString("Home.map", bundle: .strings, comment: "")
+        public static let list = NSLocalizedString("Home.list", bundle: .strings, comment: "")
     }
 
     public struct Place {
