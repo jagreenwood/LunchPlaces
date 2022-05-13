@@ -38,8 +38,12 @@ final class HomeDomainTests: XCTestCase {
             reducer: HomeDomain.reducer,
             environment: .mock(.failing))
 
-        store.send(.fetchLocation)
+        store.send(.fetchLocation) {
+            $0.isLoading = true
+        }
+        store.receive(.locationService(.authorize))
         store.receive(.locationService(.getLocation))
+        store.receive(.locationService(.configure))
     }
 
     func testFetchNearbyRestaurantsNoLocation() {
