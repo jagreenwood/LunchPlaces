@@ -21,6 +21,7 @@
 		3F736D7D282530E300296D67 /* Mock in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7C282530E300296D67 /* Mock */; };
 		3F736D7F282530E300296D67 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D7E282530E300296D67 /* Model */; };
 		3F736D8228253B6E00296D67 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 3F736D8128253B6E00296D67 /* Cache */; };
+		3F80B9F7282E760E0055054D /* PlaceRow in Frameworks */ = {isa = PBXBuildFile; productRef = 3F80B9F6282E760E0055054D /* PlaceRow */; };
 		3FD1317128294B560095B568 /* SystemEnvironment+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1317028294B560095B568 /* SystemEnvironment+Live.swift */; };
 		3FD5D33728245D6400F0C100 /* LunchPlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5D33628245D6400F0C100 /* LunchPlacesApp.swift */; };
 		3FD5D33B28245D6500F0C100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FD5D33A28245D6500F0C100 /* Assets.xcassets */; };
@@ -72,6 +73,7 @@
 				3F2605BD2826FF760055E25B /* Localization in Frameworks */,
 				3F1A171A282BBEE70037A463 /* PlaceList in Frameworks */,
 				3F423A2F282542CE00702264 /* PlacesAPI in Frameworks */,
+				3F80B9F7282E760E0055054D /* PlaceRow in Frameworks */,
 				3F736D8228253B6E00296D67 /* Cache in Frameworks */,
 				3F736D7D282530E300296D67 /* Mock in Frameworks */,
 				3F736D7B282530E300296D67 /* Core in Frameworks */,
@@ -203,6 +205,7 @@
 				3F1A171B282BBEED0037A463 /* Home */,
 				3F1A171D282BBEF40037A463 /* LocationAccess */,
 				3F1A171F282BBEF40037A463 /* LocationService */,
+				3F80B9F6282E760E0055054D /* PlaceRow */,
 			);
 			productName = LunchPlaces;
 			productReference = 3FD5D33328245D6400F0C100 /* LunchPlaces.app */;
@@ -636,6 +639,10 @@
 		3F736D8128253B6E00296D67 /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Cache;
+		};
+		3F80B9F6282E760E0055054D /* PlaceRow */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PlaceRow;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
