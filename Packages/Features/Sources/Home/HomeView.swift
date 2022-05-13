@@ -54,7 +54,9 @@ public struct HomeView: View {
                     .sheet(item: viewStore.binding(\.$route)) { route in
                         switch route {
                         case .placeDetail(let place):
-                            Text(place.name)
+                            PlaceDetail(
+                                place: place,
+                                route: viewStore.binding(\.$route))
                         }
                     }
 
