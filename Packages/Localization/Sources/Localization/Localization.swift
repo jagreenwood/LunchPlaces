@@ -10,6 +10,7 @@ import Foundation
 public struct Localization {
     public struct Generic {
         public static let appName = NSLocalizedString("Generic.appName", bundle: .strings, comment: "")
+        public static let accessibilityTapHint = NSLocalizedString("Generic.accessibilityTapHint", bundle: .strings, comment: "")
     }
 
     public struct LocationAccess {
@@ -25,6 +26,7 @@ public struct Localization {
         public static let searchPlaceholder = NSLocalizedString("Home.searchPlaceholder", bundle: .strings, comment: "")
         public static let map = NSLocalizedString("Home.map", bundle: .strings, comment: "")
         public static let list = NSLocalizedString("Home.list", bundle: .strings, comment: "")
+        public static let clearSearch = NSLocalizedString("Home.clearSearch", bundle: .strings, comment: "")
     }
 
     public struct Place {

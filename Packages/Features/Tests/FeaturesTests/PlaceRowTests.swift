@@ -18,7 +18,7 @@ extension PlaceRowDomain.Environment {
 }
 
 final class PlaceRowDomainTests: XCTestCase {
-    func testName() throws {
+    func testOnAppear() throws {
         let store = TestStore(
             initialState: PlaceRowDomain.State(
                 place: Mock.places[0]),
@@ -28,6 +28,20 @@ final class PlaceRowDomainTests: XCTestCase {
             }))
 
         store.send(.onAppear) {
+            $0.isFavorite = true
+        }
+    }
+
+    func testToggleFavorite() {
+        let store = TestStore(
+            initialState: PlaceRowDomain.State(
+                place: Mock.places[0]),
+            reducer: PlaceRowDomain.reducer,
+            environment: .mock(update(.failing) {
+                $0.toggleFavorite = { _, _ in }
+            }))
+
+        store.send(.toggleFavorite) {
             $0.isFavorite = true
         }
     }

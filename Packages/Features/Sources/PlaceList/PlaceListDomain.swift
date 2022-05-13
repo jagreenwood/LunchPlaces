@@ -6,7 +6,6 @@
 //
 
 import Common
-import ComposableArchitecture
 import Foundation
 import Model
 import PlaceRow
@@ -42,7 +41,7 @@ public struct PlaceListDomain: Equatable {
     }
 
     public static let reducer = Reducer<State, Action, SystemEnvironment<Environment>>.combine(
-        Reducer { state, action, _ in
+        Reducer { _, action, _ in
             switch action {
             case .onAppear:
                 return .none

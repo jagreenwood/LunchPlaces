@@ -8,7 +8,6 @@
 import Common
 import PlaceRow
 import SwiftUI
-import UIComponents
 
 public struct PlaceListView: View {
     let store: Store<PlaceListDomain.State, PlaceListDomain.Action>

@@ -5,9 +5,9 @@
 //  Created by Jeremy Greenwood on 05/11/2022.
 //
 
-import ComposableArchitecture
+import Common
+import Localization
 import SwiftUI
-import UIComponents
 
 public struct PlaceRowView: View {
     let store: Store<PlaceRowDomain.State, PlaceRowDomain.Action>
@@ -51,6 +51,7 @@ public struct PlaceRowView: View {
             }
             .accessibilityElement(children: .combine)
             .accessibilityLabel(Text("\(viewStore.place.name)"))
+            .accessibility(hint: Text(Localization.Generic.accessibilityTapHint))
             .onAppear {
                 viewStore.send(.onAppear)
             }

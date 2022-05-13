@@ -8,5 +8,6 @@
 import struct Model.Place
 
 extension Place: Identifiable {
+    /// Add `Identifiable` conformance to `Place`
     public var id: String { placeID }
 }

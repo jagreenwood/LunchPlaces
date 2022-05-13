@@ -99,7 +99,9 @@ extension HomeView {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.secondary)
                         .padding(.trailing)
+                        .accessibilityHidden(true)
                 })
+                .accessibilityLabel(Text(Localization.Home.clearSearch))
             }
         }
         .padding()
@@ -125,7 +127,11 @@ extension HomeView {
                             .background(Color.appPrimary.colorInvert())
                             .cornerRadius(10.0)
                             .scaleEffect(0.6)
-                        }).buttonStyle(.plain)
+                        })
+                        .buttonStyle(.plain)
+                        .accessibilityElement(children: .combine)
+                        .accessibilityLabel(Text("\(place.name)"))
+                        .accessibility(hint: Text(Localization.Generic.accessibilityTapHint))
                 }
             })
         .edgesIgnoringSafeArea([.bottom])

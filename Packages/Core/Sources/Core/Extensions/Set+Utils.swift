@@ -8,6 +8,7 @@
 import Foundation
 
 public extension Set {
+    /// A convience to toggle the membership of the given element
     mutating func toggle(_ element: Element) {
         if self.contains(element) {
             remove(element)

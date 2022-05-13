@@ -14,6 +14,7 @@ extension DecodingError.Context {
 }
 
 public extension DecodingError {
+    /// A convience discription of _why_ decoding failed.
     var userDescription: String {
         switch self {
         case .dataCorrupted(let context):

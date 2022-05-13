@@ -8,4 +8,6 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-GOOGLE_PLACES_KEY = 
+// Add you Google Places API Key here. Be sure it is not wrapped in quotes.
+// For example: GOOGLE_PLACES_KEY = this_is_my_api_key_with_no_quotes
+GOOGLE_PLACES_KEY =

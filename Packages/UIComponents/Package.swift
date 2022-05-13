@@ -19,7 +19,8 @@ let package = Package(
         .target(
             name: "UIComponents",
             dependencies: [
-                "Localization"
+                "Localization",
+                "Model"
             ])
     ]
 )
