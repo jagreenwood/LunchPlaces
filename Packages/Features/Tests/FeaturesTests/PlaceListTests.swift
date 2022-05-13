@@ -17,7 +17,7 @@ extension PlaceListDomain.Environment {
 }
 
 final class PlaceListDomainTests: XCTestCase {
-    func testName() throws {
+    func testOnAppear() throws {
         let store = TestStore(
             initialState: PlaceListDomain.State(),
             reducer: PlaceListDomain.reducer,

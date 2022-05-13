@@ -8,6 +8,8 @@
 import ComposableArchitecture
 
 public extension AlertState {
+    /// Convienence intializer
+    /// - Parameter appError: An instance of `AppError`
     init?(_ appError: AppError?) {
         guard let error = appError else {
             return nil

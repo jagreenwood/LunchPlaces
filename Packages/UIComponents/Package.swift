@@ -13,13 +13,16 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Localization"),
+        .package(path: "../Mock"),
         .package(path: "../Model")
     ],
     targets: [
         .target(
             name: "UIComponents",
             dependencies: [
-                "Localization"
+                "Localization",
+                "Mock",
+                "Model"
             ])
     ]
 )

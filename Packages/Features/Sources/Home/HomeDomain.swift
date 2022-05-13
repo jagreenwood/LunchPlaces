@@ -6,14 +6,13 @@
 //
 
 import Common
-import ComposableArchitecture
 import Foundation
 import LocationService
 import MapKit
 import Mock
 import PlaceList
-import PlacesAPI
 
+/// The Home domain is responsible for home view state and business logic
 public struct HomeDomain: Equatable {
     enum Route: Equatable, Identifiable {
         var id: String { "\(self)" }
@@ -21,6 +20,7 @@ public struct HomeDomain: Equatable {
         case placeDetail(Place)
     }
 
+    /// Home  state
     public struct State: Equatable {
         @BindableState var isLoading = false
         @BindableState var route: Route?
@@ -45,6 +45,7 @@ public struct HomeDomain: Equatable {
         public init() {}
     }
 
+    /// Home  actions
     public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case clearSearch
@@ -60,6 +61,7 @@ public struct HomeDomain: Equatable {
         case toggleMap
     }
 
+    /// Home  environment (dependencies)
     public struct Environment {
         var locationServiceEnvironment: LocationServiceDomain.Environment
         var placeListEnvironment: PlaceListDomain.Environment
@@ -125,7 +127,12 @@ public struct HomeDomain: Equatable {
                 return .none
 
             case .fetchLocation:
-                return Effect(value: .locationService(.getLocation))
+                state.isLoading = true
+
+                return .concatenate(
+                    Effect(value: .locationService(.authorize)),
+                    Effect(value: .locationService(.getLocation))
+                )
 
             case .fetchNearbyRestaurants:
                 guard let location = state.locationServiceState.location else {
@@ -206,6 +213,7 @@ public struct HomeDomain: Equatable {
     )
 }
 
+/// Conform MKCoordinateRegion to Equatable
 extension MKCoordinateRegion: Equatable {
     public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
         lhs.center.latitude == rhs.center.latitude &&

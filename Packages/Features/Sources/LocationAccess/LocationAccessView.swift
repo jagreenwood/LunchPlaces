@@ -44,10 +44,13 @@ public struct LocationAccessView: View {
                         viewStore.send(.didSelectConfirm)
                     }
                     .buttonStyle(ConfirmButtonStyle())
+                    .padding(.bottom, 40)
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding()
             .background(Color.appPrimary.colorInvert())
+            .edgesIgnoringSafeArea(.bottom)
             .onAppear {
                 viewStore.send(.onAppear)
             }
