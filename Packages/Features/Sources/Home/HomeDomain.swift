@@ -125,7 +125,10 @@ public struct HomeDomain: Equatable {
                 return .none
 
             case .fetchLocation:
-                return Effect(value: .locationService(.getLocation))
+                return .concatenate(
+                    Effect(value: .locationService(.authorize)),
+                    Effect(value: .locationService(.getLocation))
+                )
 
             case .fetchNearbyRestaurants:
                 guard let location = state.locationServiceState.location else {
