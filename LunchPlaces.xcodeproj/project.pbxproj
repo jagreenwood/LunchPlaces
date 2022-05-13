@@ -48,6 +48,7 @@
 		3F736D7828252EA500296D67 /* Mock */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Mock; sourceTree = "<group>"; };
 		3F736D802825358500296D67 /* Cache */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Cache; sourceTree = "<group>"; };
 		3F736D832825400800296D67 /* PlacesAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PlacesAPI; sourceTree = "<group>"; };
+		3F80B9F5282E6C850055054D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3FD1317028294B560095B568 /* SystemEnvironment+Live.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SystemEnvironment+Live.swift"; sourceTree = "<group>"; };
 		3FD5D33328245D6400F0C100 /* LunchPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunchPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD5D33628245D6400F0C100 /* LunchPlacesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchPlacesApp.swift; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		3FD5D32A28245D6400F0C100 = {
 			isa = PBXGroup;
 			children = (
+				3F80B9F5282E6C850055054D /* README.md */,
 				3FD5D3602824A25E00F0C100 /* Packages */,
 				3FD5D33528245D6400F0C100 /* LunchPlaces */,
 				3FD5D34628245D6500F0C100 /* LunchPlacesTests */,
