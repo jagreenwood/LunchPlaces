@@ -10,10 +10,13 @@ env:
 jobs:
   foo:
     name: Dependency Graphs
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
     - name: Git Checkout main
       uses: actions/checkout@v3
+
+    - name: Install Graphviz
+      run: brew install graphviz
 
     -  name: Show Dependencies
        run: |
