@@ -1,0 +1,28 @@
+name: Generate Dependency Graphs
+on:
+  workflow_dispatch:
+    push:
+      branches: [ main ]
+
+env:
+  GRAPH-OUTPUT: 'images/dependencies.svg'
+
+jobs:
+  foo:
+    name: Dependency Graphs
+    runs-on: macos-latest
+    steps:
+    - name: Git Checkout main
+      uses: actions/checkout@v3
+
+    -  name: Show Dependencies
+       run: |
+          for dir in Packages/*/ ; do
+              out=${dir}$GRAPH-OUTPUT
+              swift package --package-path $dir show-dependencies --format dot | dot -Tsvg -o $out
+          done
+
+    - name: Commit
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Update package dependency graphs
