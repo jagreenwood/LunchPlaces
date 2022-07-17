@@ -22,7 +22,7 @@ jobs:
        run: |
           for dir in Packages/*/ ; do
               out=${dir}$GRAPH-OUTPUT
-              swift package --package-path $dir show-dependencies --format dot | dot -Tsvg -o $out
+              swift package --package-path $dir show-dependencies --format dot | grep -v "^No" | pipe_if_not_empty dot -Tsvg -o $out
           done
 
     - name: Commit
