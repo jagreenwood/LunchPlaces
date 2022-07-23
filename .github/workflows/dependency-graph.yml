@@ -5,6 +5,7 @@ on:
       branches: [ main ]
 
 env:
+  DOT: 'images/dependencies.dot'
   GRAPH-OUTPUT: 'images/dependencies.svg'
 
 jobs:
@@ -23,7 +24,7 @@ jobs:
           for dir in Packages/*/ ; do
               out=${dir}$GRAPH-OUTPUT
               echo "$out"
-              swift package --package-path $dir show-dependencies --format dot -o $out
+              swift package --package-path $dir show-dependencies --format dot -o ${dir}$DOT
           done
 
     - name: Commit
