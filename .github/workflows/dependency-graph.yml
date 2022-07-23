@@ -5,8 +5,9 @@ on:
       branches: [ main ]
 
 env:
-  DOT: 'images/dependencies.dot'
-  GRAPH-OUTPUT: 'images/dependencies.svg'
+  DOT_OUTPUT: 'images/dependencies.dot'
+  GRAPH_OUTPUT: 'images/dependencies.svg'
+  FOO: 'No external dependencies found'
 
 jobs:
   foo:
@@ -22,9 +23,13 @@ jobs:
     -  name: Show Dependencies
        run: |
           for dir in Packages/*/ ; do
-              out=${dir}$GRAPH-OUTPUT
+              out=${dir}$GRAPH_OUTPUT
+              dot=${dir}$DOT_OUTPUT
               echo "$out"
-              swift package --package-path $dir show-dependencies --format dot -o ${dir}$DOT
+              swift package --package-path $dir show-dependencies --format dot -o $dot
+              if ! grep -q $FOO "$dot"; then
+                  dot -Tsvg $dot > $out
+              fi
           done
 
     - name: Commit
