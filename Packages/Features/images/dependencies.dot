@@ -1,0 +1,46 @@
+digraph DependenciesGraph {
+node [shape = box]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" [label="features\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Cache" [label="cache\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Cache\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Cache"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core" [label="core\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Localization" [label="localization\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Localization\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Localization"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Mock" [label="mock\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Mock\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Mock"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model" [label="model\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Mock" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" [label="placesapi\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model"
+"http://github.com/objcio/tiny-networking.git" [label="tiny-networking\nhttp://github.com/objcio/tiny-networking.git\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "http://github.com/objcio/tiny-networking.git"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/UIComponents" [label="uicomponents\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/UIComponents\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/UIComponents"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/UIComponents" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Localization"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/UIComponents" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Mock"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/UIComponents" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model"
+"https://github.com/pointfreeco/swift-composable-architecture.git" [label="swift-composable-architecture\nhttps://github.com/pointfreeco/swift-composable-architecture.git\n0.38.3"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "https://github.com/pointfreeco/swift-composable-architecture.git"
+"https://github.com/pointfreeco/combine-schedulers" [label="combine-schedulers\nhttps://github.com/pointfreeco/combine-schedulers\n0.6.0"]
+"https://github.com/pointfreeco/swift-composable-architecture.git" -> "https://github.com/pointfreeco/combine-schedulers"
+"https://github.com/pointfreeco/xctest-dynamic-overlay" [label="xctest-dynamic-overlay\nhttps://github.com/pointfreeco/xctest-dynamic-overlay\n0.3.3"]
+"https://github.com/pointfreeco/combine-schedulers" -> "https://github.com/pointfreeco/xctest-dynamic-overlay"
+"https://github.com/pointfreeco/swift-case-paths" [label="swift-case-paths\nhttps://github.com/pointfreeco/swift-case-paths\n0.9.1"]
+"https://github.com/pointfreeco/swift-composable-architecture.git" -> "https://github.com/pointfreeco/swift-case-paths"
+"https://github.com/pointfreeco/swift-custom-dump" [label="swift-custom-dump\nhttps://github.com/pointfreeco/swift-custom-dump\n0.5.0"]
+"https://github.com/pointfreeco/swift-composable-architecture.git" -> "https://github.com/pointfreeco/swift-custom-dump"
+"https://github.com/pointfreeco/swift-custom-dump" -> "https://github.com/pointfreeco/xctest-dynamic-overlay"
+"https://github.com/pointfreeco/swift-identified-collections" [label="swift-identified-collections\nhttps://github.com/pointfreeco/swift-identified-collections\n0.4.0"]
+"https://github.com/pointfreeco/swift-composable-architecture.git" -> "https://github.com/pointfreeco/swift-identified-collections"
+"https://github.com/apple/swift-collections" [label="swift-collections\nhttps://github.com/apple/swift-collections\n1.0.2"]
+"https://github.com/pointfreeco/swift-identified-collections" -> "https://github.com/apple/swift-collections"
+"https://github.com/pointfreeco/swift-composable-architecture.git" -> "https://github.com/pointfreeco/xctest-dynamic-overlay"
+"https://github.com/pointfreeco/swift-overture.git" [label="swift-overture\nhttps://github.com/pointfreeco/swift-overture.git\n0.5.0"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "https://github.com/pointfreeco/swift-overture.git"
+"https://github.com/pointfreeco/composable-core-location.git" [label="composable-core-location\nhttps://github.com/pointfreeco/composable-core-location.git\n0.2.0"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Features" -> "https://github.com/pointfreeco/composable-core-location.git"
+"https://github.com/pointfreeco/composable-core-location.git" -> "https://github.com/pointfreeco/swift-composable-architecture.git"
+}
