@@ -1,0 +1,10 @@
+digraph DependenciesGraph {
+node [shape = box]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" [label="placesapi\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core" [label="core\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core"
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model" [label="model\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model"
+"http://github.com/objcio/tiny-networking.git" [label="tiny-networking\nhttp://github.com/objcio/tiny-networking.git\nunspecified"]
+"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "http://github.com/objcio/tiny-networking.git"
+}
